@@ -22,7 +22,7 @@ export function Hero() {
 
   return (
     <section className="hero" ref={heroRef} onPointerMove={moveWithPointer} onPointerLeave={resetPointer}>
-      <video className="hero-video" autoPlay muted loop playsInline poster="https://i.pinimg.com/736x/c3/6c/a0/c36ca0a2a6aa59fe910ad20369236baf.jpg" aria-hidden="true">
+      <video className="hero-video" autoPlay muted loop playsInline poster="https://i.pinimg.com/736x/e0/29/5b/e0295b50d6f6114fe7c0b3c3254d613e.jpg" aria-hidden="true">
         <source src={siteConfig.heroVideo} type="video/mp4" />
       </video>
       <div className="hero-overlay" />
@@ -33,7 +33,7 @@ export function Hero() {
         <p className="hero-copy">A sharper way to discover PC games that fit your taste, your time, and your setup.</p>
         <div className="hero-actions">
           <Button to="/explore">Explore the library <ArrowUpRight size={18} /></Button>
-          <Link className="hero-search" to="/explore"><span className="hero-play"><Play size={13} fill="currentColor" /></span> See how PlayWise works</Link>
+          <Link className="hero-search" to="/request-installation#request-next"><span className="hero-play"><Play size={13} fill="currentColor" /></span> See how PlayWise works</Link>
         </div>
       </div>
       <div className="hero-side-note" aria-hidden="true">
@@ -42,7 +42,7 @@ export function Hero() {
       </div>
       <div className="hero-discovery-card" aria-hidden="true">
         <div className="hero-discovery-icon"><Search size={17} /></div>
-        <div><span>HAND-PICKED FOR YOU</span><b>Find your next<br />obsession.</b></div>
+        <div><b>Find your next<br />obsession.</b></div>
       </div>
     </section>
   );

@@ -49,7 +49,7 @@ export function RequestInstallation() {
         </div>
       </section>
 
-      <section className="request-next">
+      <section className="request-next" id="request-next">
         <div><p className="eyebrow">WHAT HAPPENS NEXT?</p><h2>From request<br /><em>to next steps.</em></h2></div>
         <div className="request-next-list">
           <div><b>01</b><span><strong>We review your request</strong><small>We check the game, your PC details, and the information you shared.</small></span></div>

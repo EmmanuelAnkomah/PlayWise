@@ -13,5 +13,5 @@ export const siteConfig = {
     youtube: 'https://youtube.com',
   },
   operatingHours: 'Mon - Sun: 8:00 AM – 11:00 PM GMT',
-  heroVideo: 'https://res.cloudinary.com/ctapnkmr/video/upload/v1789040315/EA_SPORTS_FC_24___Official_Gameplay_Trailer.mp4',
+  heroVideo: 'https://res.cloudinary.com/ctapnkmr/video/upload/v1790592908/Grand_Theft_Auto_VI-_An_Extended_Look_1.mp4',
 };

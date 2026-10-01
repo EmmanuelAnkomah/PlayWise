@@ -7,7 +7,6 @@ export function TrendingCard({ game }: { game: Game }) {
     <article className="trending-card">
       <Link to={`/games/${game.id}`} className="trending-card-art">
         <img src={game.coverImage} alt={`${game.title} artwork`} loading="lazy" />
-        <span className="trending-card-rank">#{game.trendRank}</span>
         <span className="trending-card-slash" />
       </Link>
       <div className="trending-card-content">

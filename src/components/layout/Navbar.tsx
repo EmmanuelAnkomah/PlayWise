@@ -6,9 +6,9 @@ import { genres } from '../../data/genres';
 const genreOrder = ['sports', 'racing', 'action', 'adventure', 'strategy', 'rpg'];
 
 const performanceLinks = [
-  { label: 'Low-end', description: 'Lighter requirements', indicator: '▰□□□', to: '/low-end' },
-  { label: 'Mid', description: 'Balanced requirements', indicator: '▰▰□□', to: '/explore?performance=mid-range' },
-  { label: 'Hardware intensive', description: 'Demanding requirements', indicator: '▰▰▰▰', to: '/high-end' },
+  { label: 'Low-end', to: '/low-end' },
+  { label: 'Medium', to: '/explore?performance=mid-range' },
+  { label: 'High-end', to: '/high-end' },
 ];
 
 export function Navbar() {
@@ -80,11 +80,9 @@ export function Navbar() {
             Performance <ChevronDown size={15} strokeWidth={2} />
           </button>
           <div className={`nav-mega-menu nav-mega-performance${desktopMenu === 'performance' ? ' is-open' : ''}`} aria-label="Find your performance level">
-            <div className="nav-mega-heading"><span>FIND YOUR PERFORMANCE LEVEL</span><i /></div>
             <div className="nav-performance-list">
               {performanceLinks.map((item) => <Link key={item.label} to={item.to} onClick={closeMobile} className="nav-menu-item nav-performance-item">
-                <span className="nav-performance-copy"><b>{item.label.toUpperCase()}</b><small>{item.description}</small></span>
-                <span className="nav-performance-indicator" aria-hidden="true">{item.indicator}</span>
+                <span className="nav-performance-copy"><b>{item.label.toUpperCase()}</b></span>
                 <ArrowUpRight size={15} />
               </Link>)}
             </div>
