@@ -82,7 +82,7 @@ export function CinematicGameplaySection() {
   return (
     <section className={`gameplay-section ${isInView ? 'is-visible' : ''}`} ref={sectionRef} aria-label="Cinematic gameplay preview">
       <div className="gameplay-heading">
-        <div><p className="eyebrow">YOUR NEXT PLAY</p><h2>Let Playwise handle your gaming <em>adventure.</em></h2></div>
+        <div><p className="eyebrow"></p><h2>Playwise handles your gaming <em>adventure.</em></h2></div>
         <p>Discover the experience waiting on the other side of your request.</p>
       </div>
       <div className="gameplay-frame">

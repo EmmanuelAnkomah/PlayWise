@@ -30,7 +30,6 @@ export function RequestInstallation() {
             </div>
           </div>
         </div>
-        <span className="request-hero-index">PLAYWISE / INSTALLATION</span>
       </section>
 
       <CinematicGameplaySection />

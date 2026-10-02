@@ -50,7 +50,7 @@ const showcaseGames: Game[] = [
     longDescription: 'Unleash Wolverine in a story-driven action adventure from Insomniac Games, built around visceral combat and a powerful original story.',
     genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2026, rating: 4.8, likes: 1980,
     coverImage: externalArt('https://cdn.marvel.com/content/2x/marvelswolverine_lob_crd_02.webp'), backdropImage: art('photo-1542751371-adc38448a05e'),
-    screenshots: [art('photo-1550745165-9bc0b252726f')], trending: true, developer: 'Insomniac Games', sizeEstimate: 'TBA', status: 'COMING SOON', trendRank: '03',
+    screenshots: [art('photo-1550745165-9bc0b252726f')], trending: true, developer: 'Insomniac Games', sizeEstimate: 'TBA', status: 'AVAILABLE NOW', trendRank: '03',
     minimumRequirements: req('TBA', 'TBA', 'TBA', 'TBA', 'TBA', 'TBA'), available: false,
   },
   {

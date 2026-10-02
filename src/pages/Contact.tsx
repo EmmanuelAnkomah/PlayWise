@@ -5,13 +5,12 @@ import { Link } from 'react-router-dom';
 import { SupportRobot } from '../components/contact/SupportRobot';
 import { siteConfig } from '../config/siteConfig';
 import { supportCategories, supportFaqs } from '../data/supportData';
-import { buildSupportWhatsAppUrl, createWhatsAppChatUrl } from '../utils/whatsapp';
+import { buildSupportWhatsAppUrl } from '../utils/whatsapp';
 
 export function Contact() {
   const [query, setQuery] = useState('');
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const filteredFaqs = useMemo(() => supportFaqs.filter((faq) => `${faq.question} ${faq.answer}`.toLowerCase().includes(query.toLowerCase())), [query]);
-  const requestUrl = createWhatsAppChatUrl("Hi Playwise, I'd like to request a game. Can you help me check availability?");
   const supportUrl = buildSupportWhatsAppUrl();
 
   return (
@@ -33,18 +32,18 @@ export function Contact() {
 
       <section className="support-section support-topics">
         <div className="support-section-heading"><div><p className="eyebrow">HOW CAN WE HELP?</p><h2>What do you need<br /><em>help with?</em></h2></div><p>Choose a topic and we’ll point you in the right direction.</p></div>
-        <div className="support-category-grid">{supportCategories.map((category, index) => { const Icon = category.icon; return <motion.a className="support-category" href={category.href} key={category.number} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .2 }} transition={{ delay: index * .06 }}><span className="support-category-number">{category.number}</span><Icon size={23} /><h3>{category.title}</h3><p>{category.description}</p><ArrowRight className="support-category-arrow" size={18} /></motion.a>; })}</div>
+        <div className="support-category-grid">{supportCategories.map((category, index) => { const Icon = category.icon; return <motion.a className="support-category" href={category.href} key={category.number} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .2 }} transition={{ delay: index * .06 }}><Icon size={23} /><h3>{category.title}</h3><p>{category.description}</p><ArrowRight className="support-category-arrow" size={18} /></motion.a>; })}</div>
       </section>
 
       <section className="support-section support-options-section" id="support-options">
-        <div className="support-section-heading"><div><p className="eyebrow">DIRECT SUPPORT</p><h2>Talk to <em>Playwise.</em></h2></div><p>For the fastest response, choose the channel that works best for you.</p></div>
+        <div className="support-section-heading"><div><p className="eyebrow">DIRECT SUPPORT</p></div><p>Guaranteed support from a real Playwise team member, through the channel that works best for you.</p></div>
         <div className="support-contact-grid">
           <motion.div className="support-whatsapp-card" whileHover={{ y: -5 }}><div className="support-card-top"><MessageCircle size={30} /><span>FASTEST RESPONSE</span></div><h3>WhatsApp support</h3><p>Chat with us directly for game requests, installation questions, availability and general support.</p><a className="support-action support-action-lime" href={supportUrl} target="_blank" rel="noreferrer"><MessageCircle size={17} /> Chat on WhatsApp <ArrowRight size={17} /></a></motion.div>
           <motion.div className="support-email-card" whileHover={{ y: -5 }}><div className="support-card-top"><Mail size={30} /><span>DETAILED SUPPORT</span></div><h3>Email support</h3><p>For detailed questions, technical issues or anything that needs more explanation, send us an email.</p><a className="support-action support-action-dark" href={`mailto:${siteConfig.email}`}><Mail size={17} /> Send an email <ArrowRight size={17} /></a></motion.div>
         </div>
       </section>
 
-      <section className="support-request-band"><div><p className="eyebrow">CAN’T FIND IT?</p><h2>Looking for a<br /><em>specific game?</em></h2><p>Send us the title and we’ll check what’s currently available.</p></div><a className="support-button support-button-lime" href={requestUrl} target="_blank" rel="noreferrer">Request a game <ArrowRight size={17} /></a></section>
+      <section className="support-request-band"><div><p className="eyebrow">CAN’T FIND IT?</p><h2>Looking for a<br /><em>specific game?</em></h2><p>Send us the title and we’ll check what’s currently available.</p></div><Link className="support-button support-button-lime" to="/request-installation#installation-form">Request a game <ArrowRight size={17} /></Link></section>
 
       <section className="support-section support-faq-section">
         <div className="support-faq-heading"><p className="eyebrow">QUICK ANSWERS</p><h2>Find an <em>answer.</em></h2><label className="support-search"><Search size={18} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search Playwise support..." aria-label="Search Playwise support" /></label></div>

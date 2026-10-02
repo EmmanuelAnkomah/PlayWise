@@ -36,10 +36,6 @@ export function Hero() {
           <Link className="hero-search" to="/request-installation#request-next"><span className="hero-play"><Play size={13} fill="currentColor" /></span> See how PlayWise works</Link>
         </div>
       </div>
-      <div className="hero-side-note" aria-hidden="true">
-        <span>SCROLL TO EXPLORE</span>
-        <i />
-      </div>
       <div className="hero-discovery-card" aria-hidden="true">
         <div className="hero-discovery-icon"><Search size={17} /></div>
         <div><b>Find your next<br />obsession.</b></div>
