@@ -32,14 +32,12 @@ export function Genres() {
   const reducedMotion = useReducedMotion();
   return (
     <main className="genres-page">
-      <section className="genres-hero" style={{ backgroundImage: 'url("https://www.pcworld.com/wp-content/uploads/2025/06/pc-games-discount.jpg?quality=50&strip=all&w=1024")' }}>
+      <section className="genres-hero" style={{ backgroundImage: 'url("https://i.pinimg.com/1200x/3d/3e/8f/3d3e8fb53dd8cba503249862e24ab898.jpg")' }}>
         <div>
-          <h1>Find your kind<br />of <em>game.</em></h1>
-          <p>Explore Playwise by genre and find the kind of game you want to play.</p>
+          <h1>Choose your<br /><em>genre.</em></h1>
         </div>
       </section>
       <section className="genres-directory">
-        <div className="genres-directory-heading"><p className="eyebrow">SELECT YOUR PLAYSTYLE</p><span>DISCOVER / FILTER / PLAY</span></div>
         <motion.div className="genres-grid" initial={reducedMotion ? false : 'hidden'} whileInView="visible" viewport={{ once: true, amount: .18 }} variants={reducedMotion ? undefined : genreGridVariants}>
           {orderedGenres.map((genre) => {
             return <motion.div key={genre.id} className={`genre-card genre-card-${genre.id}`} variants={reducedMotion ? undefined : genreCardVariants} transition={reducedMotion ? { duration: 0 } : { duration: .48, ease: [0.22, 1, 0.36, 1] }}>

@@ -103,23 +103,28 @@ const showcaseGames: Game[] = [
 ];
 
 type VaultInput = Pick<Game, 'id' | 'title' | 'genres' | 'performanceCategory' | 'releaseYear'> &
-  Partial<Pick<Game, 'tagline' | 'developer' | 'franchise' | 'sizeEstimate' | 'vaultSize'>> & { art: string };
+  Partial<Pick<Game, 'tagline' | 'developer' | 'franchise' | 'sizeEstimate' | 'vaultSize' | 'minimumRequirements' | 'recommendedRequirements' | 'description' | 'longDescription'>> & { art: string };
 
-const pendingRequirements = (): HardwareRequirements => req(
-  'Verification in progress',
-  'Verification in progress',
-  'Verification in progress',
-  'Ask PlayWise before installation',
-  'Windows PC requirements are being checked',
-  undefined,
-  'PlayWise will confirm the official minimum specification before installation.',
-);
+const tierRequirements = (tier: Game['performanceCategory']): { minimum: HardwareRequirements; recommended: HardwareRequirements } => {
+  if (tier === 'low-end') return {
+    minimum: req('Intel Core i3 / AMD Ryzen 3', '8 GB RAM', 'GTX 750 Ti / Radeon R7 360', '50 GB available space'),
+    recommended: req('Intel Core i5 / AMD Ryzen 5', '8 GB RAM', 'GTX 1060 / Radeon RX 580', '50 GB available space', 'Windows 10/11 64-bit'),
+  };
+  if (tier === 'mid-range') return {
+    minimum: req('Intel Core i5 / AMD Ryzen 5', '8 GB RAM', 'GTX 1060 / Radeon RX 580', '70 GB available space'),
+    recommended: req('Intel Core i7 / AMD Ryzen 7', '16 GB RAM', 'RTX 3060 / Radeon RX 6700 XT', '70 GB available space', 'Windows 10/11 64-bit'),
+  };
+  return {
+    minimum: req('Intel Core i5 / AMD Ryzen 5', '16 GB RAM', 'GTX 1660 / Radeon RX 5600 XT', '100 GB available space'),
+    recommended: req('Intel Core i7 / AMD Ryzen 7', '16 GB RAM', 'RTX 4070 / Radeon RX 7800 XT', '100 GB available space', 'Windows 11 64-bit'),
+  };
+};
 
 const vaultGame = ({ art: artwork, ...game }: VaultInput): Game => ({
   ...game,
-  tagline: game.tagline ?? 'Ready when your setup is.',
-  description: 'Available to request through PlayWise. Confirm your PC setup and we will guide the installation.',
-  longDescription: 'This title is in the PlayWise PC collection. Share your hardware when requesting installation and we will confirm compatibility before getting started.',
+  tagline: game.tagline,
+  description: game.description ?? `${game.title} is a ${game.genres.slice(0, 2).join(' and ')} game built around exploration, challenge and memorable play.`,
+  longDescription: game.longDescription ?? `${game.title} brings its ${game.genres.slice(0, 2).join(' and ')} identity to a focused world of missions, encounters and progression.`,
   rating: 0,
   likes: 0,
   coverImage: art(artwork),
@@ -127,7 +132,8 @@ const vaultGame = ({ art: artwork, ...game }: VaultInput): Game => ({
   screenshots: [art(artwork)],
   available: true,
   requirementsVerified: false,
-  minimumRequirements: pendingRequirements(),
+  minimumRequirements: game.minimumRequirements ?? tierRequirements(game.performanceCategory).minimum,
+  recommendedRequirements: game.recommendedRequirements ?? tierRequirements(game.performanceCategory).recommended,
 });
 
 const vaultCatalog: Game[] = [
@@ -146,8 +152,7 @@ const vaultCatalog: Game[] = [
   vaultGame({ id: 'need-for-speed-payback', title: 'Need for Speed Payback', genres: ['racing', 'open-world'], performanceCategory: 'mid-range', releaseYear: 2017, franchise: 'Need for Speed', art: 'photo-1503376780353-7e6692767b70' }),
   vaultGame({ id: 'need-for-speed-heat', title: 'Need for Speed Heat', genres: ['racing', 'open-world'], performanceCategory: 'mid-range', releaseYear: 2019, franchise: 'Need for Speed', art: 'photo-1492144534655-ae79c964c9d7', vaultSize: 'wide' }),
   vaultGame({ id: 'need-for-speed-unbound', title: 'Need for Speed Unbound', genres: ['racing', 'open-world'], performanceCategory: 'high-end', releaseYear: 2022, franchise: 'Need for Speed', art: 'photo-1504215680853-026ed2a45def' }),
-  vaultGame({ id: 'pes-2013', title: 'PES 2013', genres: ['sports'], performanceCategory: 'low-end', releaseYear: 2012, franchise: 'PES', art: 'photo-1574629810360-7efbbe195018' }),
-  vaultGame({ id: 'pes-2017', title: 'PES 2017', genres: ['sports'], performanceCategory: 'low-end', releaseYear: 2016, franchise: 'PES', art: 'photo-1517466787929-bc90951d0974' }),
+  vaultGame({ id: 'pes-collections', title: 'PES Collections', genres: ['sports'], performanceCategory: 'low-end', releaseYear: 2013, franchise: 'PES', art: 'photo-1574629810360-7efbbe195018' }),
   vaultGame({ id: 'ready-or-not', title: 'Ready or Not', genres: ['shooter', 'action'], performanceCategory: 'mid-range', releaseYear: 2023, developer: 'VOID Interactive', art: 'photo-1542751371-adc38448a05e', vaultSize: 'tall' }),
   vaultGame({ id: 'sekiro-shadows-die-twice', title: 'Sekiro: Shadows Die Twice', genres: ['action', 'adventure', 'stealth'], performanceCategory: 'mid-range', releaseYear: 2019, developer: 'FromSoftware', art: 'photo-1518709268805-4e9042af9f23' }),
   vaultGame({ id: 'sleeping-dogs', title: 'Sleeping Dogs', genres: ['action', 'open-world'], performanceCategory: 'low-end', releaseYear: 2014, developer: 'United Front Games', art: 'photo-1519608487953-e999c86e7455' }),
@@ -165,6 +170,16 @@ const vaultCatalog: Game[] = [
   vaultGame({ id: 'elden-ring', title: 'Elden Ring', genres: ['action', 'rpg', 'adventure'], performanceCategory: 'mid-range', releaseYear: 2022, developer: 'FromSoftware', art: 'photo-1518709268805-4e9042af9f23', vaultSize: 'wide' }),
   vaultGame({ id: 'god-of-war-ragnarok', title: 'God of War Ragnarök', genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2024, developer: 'Santa Monica Studio', art: 'photo-1511497584788-876760111969' }),
   vaultGame({ id: 'mad-max', title: 'Mad Max', genres: ['action', 'open-world'], performanceCategory: 'low-end', releaseYear: 2015, developer: 'Avalanche Studios', art: 'photo-1504215680853-026ed2a45def' }),
+  vaultGame({ id: 'days-gone', title: 'Days Gone', genres: ['action', 'adventure', 'open-world'], performanceCategory: 'mid-range', releaseYear: 2021, developer: 'Bend Studio', art: 'photo-1518709268805-4e9042af9f23', minimumRequirements: req('Intel Core i5-2500K / AMD FX 6300', '8 GB RAM', 'GTX 780 / Radeon R9 290', '70 GB available space', 'Windows 10 64-bit', 'Version 11'), recommendedRequirements: req('Intel Core i7-4770K / AMD Ryzen 5 1500X', '16 GB RAM', 'GTX 1060 / Radeon RX 580', '70 GB available space', 'Windows 10 64-bit', 'Version 11') }),
+  vaultGame({ id: 'ghost-of-tsushima', title: 'Ghost of Tsushima', genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2024, developer: 'Sucker Punch Productions / Nixxes Software', art: 'photo-1470770841072-f978cf4d019e', minimumRequirements: req('Intel Core i3-7100 / AMD Ryzen 3 1200', '8 GB RAM', 'GTX 960 / Radeon RX 5500 XT', '75 GB SSD', 'Windows 10 64-bit', 'Version 12'), recommendedRequirements: req('Intel Core i5-8600 / AMD Ryzen 5 3600', '16 GB RAM', 'RTX 2060 / Radeon RX 5600 XT', '75 GB SSD', 'Windows 10 64-bit', 'Version 12') }),
+  vaultGame({ id: 'the-witcher-3-wild-hunt', title: 'The Witcher 3: Wild Hunt', genres: ['rpg', 'action', 'adventure'], performanceCategory: 'mid-range', releaseYear: 2015, developer: 'CD Projekt Red', art: 'photo-1518709268805-4e9042af9f23', minimumRequirements: req('Intel Core i5-2500K / AMD Phenom II X4 940', '6 GB RAM', 'GTX 660 / Radeon HD 7870', '40 GB available space', 'Windows 7/8 64-bit', 'Version 11'), recommendedRequirements: req('Intel Core i7-3770 / AMD FX-8350', '8 GB RAM', 'GTX 770 / Radeon R9 290', '40 GB available space', 'Windows 7/8 64-bit', 'Version 11') }),
+  vaultGame({ id: 'injustice-gods-among-us', title: 'Injustice: Gods Among Us', genres: ['fighting', 'action'], performanceCategory: 'low-end', releaseYear: 2013, developer: 'NetherRealm Studios', art: 'photo-1542751371-adc38448a05e' }),
+  vaultGame({ id: 'mortal-kombat-1', title: 'Mortal Kombat 1', genres: ['fighting', 'action'], performanceCategory: 'high-end', releaseYear: 2023, developer: 'NetherRealm Studios', art: 'photo-1511512578047-dfb367046420' }),
+  vaultGame({ id: 'nba-2k27', title: 'NBA 2K27', genres: ['sports'], performanceCategory: 'high-end', releaseYear: 2026, franchise: 'NBA 2K', art: 'photo-1546519638-68e109498ffc' }),
+  vaultGame({ id: 'wwe-2k26', title: 'WWE 2K26', genres: ['sports', 'fighting'], performanceCategory: 'mid-range', releaseYear: 2026, franchise: 'WWE 2K', art: 'photo-1461896836934-ffe607ba8211' }),
+  vaultGame({ id: 'mafia-the-old-country', title: 'Mafia: The Old Country', genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2025, developer: 'Hangar 13', art: 'photo-1518005020951-eccb494ad742' }),
+  vaultGame({ id: 'need-for-speed-rivals', title: 'Need for Speed Rivals', genres: ['racing', 'open-world'], performanceCategory: 'low-end', releaseYear: 2013, franchise: 'Need for Speed', art: 'photo-1503376780353-7e6692767b70' }),
+  vaultGame({ id: 'shadow-fight-arena', title: 'Shadow Fight Arena', genres: ['fighting', 'action'], performanceCategory: 'low-end', releaseYear: 2020, developer: 'Nekki', art: 'photo-1518709268805-4e9042af9f23' }),
 ];
 
 export const games: Game[] = [...showcaseGames, ...vaultCatalog];

@@ -43,7 +43,7 @@ export function Contact() {
         </div>
       </section>
 
-      <section className="support-request-band"><div><p className="eyebrow">CAN’T FIND IT?</p><h2>Looking for a<br /><em>specific game?</em></h2><p>Send us the title and we’ll check what’s currently available.</p></div><Link className="support-button support-button-lime" to="/request-installation#installation-form">Request a game <ArrowRight size={17} /></Link></section>
+      <section className="support-request-band"><div><h2>Looking for a<br /><em>specific game?</em></h2><p>Send us the title and we’ll check what’s currently available.</p></div><Link className="support-button support-button-lime" to="/request-installation#installation-form">Request a game <ArrowRight size={17} /></Link></section>
 
       <section className="support-section support-faq-section">
         <div className="support-faq-heading"><p className="eyebrow">QUICK ANSWERS</p><h2>Find an <em>answer.</em></h2><label className="support-search"><Search size={18} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search Playwise support..." aria-label="Search Playwise support" /></label></div>

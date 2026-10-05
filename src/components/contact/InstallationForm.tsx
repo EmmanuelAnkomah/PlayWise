@@ -63,7 +63,7 @@ export function InstallationForm({ gameTitle = '', onChange }: { gameTitle?: str
           email: form.email.trim(),
           whatsapp: form.whatsapp.trim(),
           pcSpecifications: form.pcSpecifications.trim(),
-          message: form.additionalMessage.trim(),
+          message: form.additionalMessage?.trim() ?? '',
           _subject: `Playwise Installation Request — ${form.gameTitle.trim()}`,
           _replyto: form.email.trim(),
         }),

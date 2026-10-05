@@ -1,13 +1,17 @@
-import { ArrowUpRight } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { Game } from '../../types/game';
 
-const tierLabel = (tier: Game['performanceCategory']) => tier === 'mid-range' ? 'MEDIUM' : tier.replace('-end', '').toUpperCase();
-
 export function VaultGameWall({ games }: { games: Game[] }) {
+  const reducedMotion = useReducedMotion();
   if (!games.length) return <div className="vault-empty"><p className="eyebrow">NO MATCHES IN THE VAULT</p><h2>Try another search<br />or filter.</h2></div>;
-  return <section className="vault-wall" aria-label="Available PC games">{games.map((game, index) => <article key={game.id} className={`vault-card vault-card-${game.vaultSize ?? 'standard'}`}>
-    <Link to={`/games/${game.id}`} className="vault-card-art" aria-label={`View ${game.title}`}><img src={game.coverImage} alt={`${game.title} cover artwork`} loading="lazy" /><span className="vault-card-number">{String(index + 1).padStart(2, '0')}</span><span className="vault-card-tier">{tierLabel(game.performanceCategory)}</span></Link>
-    <div className="vault-card-copy"><div><p>{game.genres.slice(0, 2).join(' / ')}</p><h2><Link to={`/games/${game.id}`}>{game.title}</Link></h2></div><div className="vault-card-actions"><Link to={`/games/${game.id}`}>View game <ArrowUpRight size={15} /></Link><Link className="vault-request" to={`/request-installation?game=${game.id}`}>Request</Link></div></div>
-  </article>)}</section>;
+  return <section className="vault-wall" aria-label="Available PC games">{games.map((game, index) => <motion.article key={game.id} className={`genre-card library-game-card genre-card-${game.genres[0]}`} initial={reducedMotion || index < 4 ? false : { opacity: .01, x: -28, scale: .985 }} whileInView={reducedMotion || index < 4 ? undefined : { opacity: 1, x: 0, scale: 1 }} viewport={{ once: true, amount: .18 }} transition={reducedMotion ? { duration: 0 } : { duration: .5, delay: (index % 4) * .08, ease: [0.22, 1, 0.36, 1] }}>
+    <Link to={`/games/${game.id}`} aria-label={`View ${game.title}`}>
+      <img src={game.coverImage} alt={`${game.title} cover artwork`} loading="lazy" />
+      <div className="genre-card-shade" />
+      <div className="genre-card-content"><span>{game.genres[0]}</span><h2>{game.title}</h2></div>
+      <span className="genre-card-cta">VIEW GAME <ArrowRight size={15} /></span>
+    </Link>
+  </motion.article>)}</section>;
 }
