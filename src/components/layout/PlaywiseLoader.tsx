@@ -21,9 +21,12 @@ export function PlaywiseLoader({ onComplete }: { onComplete: () => void }) {
     </div>
     <div className="loader-vignette" aria-hidden="true" />
     <div className="loader-center">
-      <div className="loader-mark">
-        <span className="loader-p">P</span>
-        <svg viewBox="0 0 180 180" aria-hidden="true"><circle cx="90" cy="90" r="74" /></svg>
+      <div className="loader-lockup">
+        <div className="loader-mark">
+          <span className="loader-p">P</span>
+          <svg viewBox="0 0 180 180" aria-hidden="true"><circle cx="90" cy="90" r="74" /></svg>
+        </div>
+        <div className="loader-wordmark" aria-hidden="true"><span className="loader-word-left">lay</span><span className="loader-word-right">wise</span></div>
       </div>
     </div>
   </div>;

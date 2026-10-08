@@ -82,8 +82,8 @@ export function CinematicGameplaySection() {
   return (
     <section className={`gameplay-section ${isInView ? 'is-visible' : ''}`} ref={sectionRef} aria-label="Cinematic gameplay preview">
       <div className="gameplay-heading">
-        <div><p className="eyebrow"></p><h2>Playwise handles your gaming <em>adventure.</em></h2></div>
-        <p>Discover the experience waiting on the other side of your request.</p>
+        <div><h2>Playwise handles your gaming <em>adventure.</em></h2></div>
+        <p>From request to first launch, every step stays clear and effortless.</p>
       </div>
       <div className="gameplay-frame">
         <video ref={videoRef} className="gameplay-video" preload="metadata" playsInline onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)} onTimeUpdate={(event) => setProgress(event.currentTarget.duration ? event.currentTarget.currentTime / event.currentTarget.duration : 0)} onEnded={() => setIsPlaying(false)} aria-label="Pragmata gameplay preview">

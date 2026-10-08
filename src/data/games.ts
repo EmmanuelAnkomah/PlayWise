@@ -11,16 +11,16 @@ const showcaseGames: Game[] = [
     id: '007-first-light', title: '007 First Light', tagline: 'The world is not enough.',
     description: 'A new James Bond origin story built around cinematic action, stealth and globe-spanning espionage.',
     longDescription: 'Step into the early years of James Bond in a cinematic action adventure filled with high-stakes missions, stealth and espionage.',
-    genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2026, rating: 4.7, likes: 876,
-    coverImage: externalArt('https://sm.pcmag.com/pcmag_me/photo/default/6p9lgt_g4rq.jpg'), backdropImage: art('photo-1531297484001-80022131f5a1'),
-    screenshots: [art('photo-1550745165-9bc0b252726f')], trending: true, developer: 'IO Interactive', sizeEstimate: 'TBA', badge: 'AVAILABLE ON PC', status: 'AVAILABLE ON PC', platform: 'PC', trendRank: '02',
+    genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2026,
+    coverImage: externalArt('https://i.pinimg.com/736x/ca/15/43/ca15433cc435762e4809a13ccc96a4bb.jpg'), backdropImage: art('photo-1531297484001-80022131f5a1'),
+    screenshots: ['https://i.pinimg.com/736x/ca/15/43/ca15433cc435762e4809a13ccc96a4bb.jpg'], trending: true, developer: 'IO Interactive', sizeEstimate: 'TBA', badge: 'AVAILABLE ON PC', status: 'AVAILABLE ON PC', platform: 'PC', trendRank: '02',
     minimumRequirements: req('Intel Core i5 / AMD Ryzen 5', '16 GB RAM', 'GTX 1660 / RX 5600 XT', 'TBA', 'Windows 10/11 64-bit', 'Version 12'),
   },
   {
     id: 'forza-horizon-6', title: 'Forza Horizon 6', tagline: 'Race across Japan.',
     description: 'Open-world racing across Japan featuring 550+ real-world cars, dense urban environments, scenic countryside, customization and multiplayer.',
     longDescription: 'Open-world racing across Japan featuring 550+ real-world cars, dense urban environments, scenic countryside, car customization, multiplayer and extensive EventLab creation tools.',
-    genres: ['racing', 'sports'], performanceCategory: 'high-end', releaseYear: 2026, rating: 4.8, likes: 982,
+    genres: ['racing', 'sports'], performanceCategory: 'high-end', releaseYear: 2026,
     coverImage: externalArt('https://images.squarespace-cdn.com/content/v1/5c95f8d416b640656eb7765a/1769109600663-PX9QS40SY9M4Y9JGHI7L/Forza+Horizon+6.png?format=2500w'), backdropImage: art('photo-1511994477422-b69e44bd4ea9'),
     screenshots: [art('photo-1492144534655-ae79c964c9d7')], featured: true, developer: 'Playground Games', sizeEstimate: '160 GB', badge: 'FEATURED',
     minimumRequirements: req('Intel Core i5-8400 / AMD Ryzen 5 1600', '16 GB RAM', 'NVIDIA GTX 1650 / AMD RX 6500 XT / Intel Arc A380', '~160 GB SSD required', 'Windows 10 22H2 (19045) or newer', 'Version 12', '4 GB VRAM class. Target: 1080p, Low, 60 FPS.'),
@@ -29,7 +29,7 @@ const showcaseGames: Game[] = [
     id: 'the-last-of-us-part-ii-remastered', title: 'The Last of Us Part II Remastered', tagline: 'Every choice has a cost.',
     description: 'A cinematic third-person action-adventure featuring intense combat, exploration and a detailed post-apocalyptic world.',
     longDescription: 'A cinematic third-person action-adventure featuring intense combat, exploration and a detailed post-apocalyptic world. The PC version requires an SSD and 16 GB RAM even at minimum settings.',
-    genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2025, rating: 4.7, likes: 1250,
+    genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2025,
     coverImage: externalArt('https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2531310/94b5d8b3165a6fe592e406054b08a2dd24e2f848/capsule_616x353.jpg?t=1750959180'), backdropImage: art('photo-1531297484001-80022131f5a'),
     screenshots: [art('photo-1560253023-3ec5d502959f'), art('photo-1612287230202-1ff1d85d1bdf')], featured: true, developer: 'Naughty Dog', publisher: 'PlayStation', sizeEstimate: '150 GB SSD', badge: 'HIGH-END',
     minimumRequirements: req('Intel Core i3-8100 / AMD Ryzen 3 1300X', '16 GB RAM', 'NVIDIA GTX 1650 4GB / AMD RX 5500 XT 4GB', '150 GB SSD', 'Windows 10/11 64-bit', 'Version 12', 'Target: 720p, Low, approximately 30 FPS.'),
@@ -39,7 +39,7 @@ const showcaseGames: Game[] = [
     id: 'gta-vi', title: 'GTA VI', tagline: 'Welcome to Vice City.',
     description: 'Return to Vice City for the next evolution of the Grand Theft Auto series.',
     longDescription: 'A new crime saga set in the neon-soaked state of Leonida, bringing the biggest and most immersive Grand Theft Auto experience yet.',
-    genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2026, rating: 4.9, likes: 2400,
+    genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2026,
     coverImage: externalArt('https://i.ebayimg.com/images/g/Cv4AAeSwP19qWjJE/s-l1600.webp'), backdropImage: art('photo-1519608487953-e999c86e7455'),
     screenshots: [art('photo-1535223289827-42f1e9919769')], trending: true, developer: 'Rockstar Games', sizeEstimate: 'TBA', status: 'COMING NOVEMBER 19, 2026 · CONSOLE ONLY', trendRank: '01',
     minimumRequirements: req('TBA', 'TBA', 'TBA', 'TBA', 'TBA', 'TBA'), available: false,
@@ -48,7 +48,7 @@ const showcaseGames: Game[] = [
     id: 'marvels-wolverine', title: "Marvel's Wolverine", tagline: 'The best there is.',
     description: 'A standalone Marvel action adventure starring Wolverine in a brutal, cinematic journey.',
     longDescription: 'Unleash Wolverine in a story-driven action adventure from Insomniac Games, built around visceral combat and a powerful original story.',
-    genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2026, rating: 4.8, likes: 1980,
+    genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2026,
     coverImage: externalArt('https://cdn.marvel.com/content/2x/marvelswolverine_lob_crd_02.webp'), backdropImage: art('photo-1542751371-adc38448a05e'),
     screenshots: [art('photo-1550745165-9bc0b252726f')], trending: true, developer: 'Insomniac Games', sizeEstimate: 'TBA', status: 'AVAILABLE NOW', trendRank: '03',
     minimumRequirements: req('TBA', 'TBA', 'TBA', 'TBA', 'TBA', 'TBA'), available: false,
@@ -57,44 +57,44 @@ const showcaseGames: Game[] = [
     id: 'resident-evil-requiem', title: 'Resident Evil Requiem', tagline: 'Survival has a new face.',
     description: 'A modern survival-horror experience combining investigation, puzzles, resource management and intense combat.',
     longDescription: 'A modern survival-horror experience combining investigation, puzzles, resource management and intense combat, with both first-person and third-person perspectives.',
-    genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2026, rating: 4.8, likes: 2100,
+    genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2026,
     coverImage: externalArt('https://gamegpu.com/images/1_2026/GAMES/Resident%20Evil%20Requiem%20zheka/H6FrTeEZnENziKeUCU4FYA_upscayl_2x_upscayl-standard-4x_ggpu.webp'), backdropImage: art('photo-1550745165-9bc0b252726f'),
     screenshots: [art('photo-1603481546238-487240415921')], featured: true, developer: 'Capcom', sizeEstimate: '70 GB SSD', badge: 'HIGH-END',
     minimumRequirements: req('Intel Core i5-8500 / AMD Ryzen 5 3500', '16 GB RAM', 'NVIDIA GTX 1660 6GB / AMD RX 5500 XT 8GB', '70 GB SSD required', 'Windows 11 64-bit', 'Version 12', 'Target: 1080p output using upscaling, native 640p, approximately 30 FPS.'),
   },
   {
     id: 'forza-horizon-5', title: 'Forza Horizon 5', tagline: 'Your ultimate horizon awaits.', description: 'Race across the vibrant landscapes of Mexico in the ultimate open-world driving experience.',
-    genres: ['racing', 'sports'], performanceCategory: 'mid-range', releaseYear: 2021, rating: 4.6, likes: 876,
+    genres: ['racing', 'sports'], performanceCategory: 'mid-range', releaseYear: 2021,
     coverImage: art('photo-1503736334956-4c8f8e92946d'), backdropImage: art('photo-1511994477422-b69e44bd4ea9'),
     screenshots: [art('photo-1492144534655-ae79c964c9d7')], developer: 'Playground Games', sizeEstimate: '110 GB',
     minimumRequirements: req('Intel Core i5-4460 / Ryzen 3 1200', '8 GB RAM', 'GTX 970 / RX 470'),
     recommendedRequirements: req('Intel Core i5-8400 / Ryzen 5 1500X', '16 GB RAM', 'GTX 1070 / RX 590'),
   },
   {
-    id: 'stardew-valley', title: 'Stardew Valley', tagline: 'A little place in the valley.', description: 'Turn an overgrown field into a thriving farm and build a life on your own terms.',
-    genres: ['adventure', 'rpg'], performanceCategory: 'low-end', releaseYear: 2016, rating: 4.8, likes: 1450,
+    id: 'ea-sports-f1-25', title: 'EA SPORTS F1 25', tagline: 'The official Formula 1 game.', description: 'Race through the 2025 Formula 1 season with authentic teams, drivers, circuits and career-focused modes.',
+    genres: ['adventure', 'rpg'], performanceCategory: 'low-end', releaseYear: 2016,
     coverImage: art('photo-1497250681960-ef046c08a56e'), backdropImage: art('photo-1500534623283-312aade485b7'),
     screenshots: [art('photo-1473445361085-b9a07f55608b')], developer: 'ConcernedApe', sizeEstimate: '500 MB',
     minimumRequirements: req('2 GHz processor', '2 GB RAM', '256 MB video memory', '500 MB available space'),
   },
   {
     id: 'baldurs-gate-3', title: "Baldur's Gate 3", tagline: 'Gather your party.', description: 'Forge a tale of fellowship and betrayal in a next-generation roleplaying adventure.',
-    genres: ['rpg', 'strategy', 'adventure'], performanceCategory: 'high-end', releaseYear: 2023, rating: 4.9, likes: 1130,
+    genres: ['rpg', 'strategy', 'adventure'], performanceCategory: 'high-end', releaseYear: 2023,
     coverImage: art('photo-1518709268805-4e9042af9f23'), backdropImage: art('photo-1531297484001-80022131f5a1'),
     screenshots: [art('photo-1579373903781-fd5c0c30c4cd')], developer: 'Larian Studios', sizeEstimate: '150 GB',
     minimumRequirements: req('Intel i5-4690 / AMD FX 8350', '8 GB RAM', 'GTX 970 / RX 480'),
     recommendedRequirements: req('Intel i7-8700K / Ryzen 5 3600', '16 GB RAM', 'RTX 2060 Super / RX 5700 XT'),
   },
   {
-    id: 'valorant', title: 'VALORANT', tagline: 'Creativity is your greatest weapon.', description: 'A competitive 5v5 tactical shooter where precise gunplay meets unique abilities.',
-    genres: ['action', 'strategy'], performanceCategory: 'low-end', releaseYear: 2020, rating: 4.5, likes: 1890,
-    coverImage: art('photo-1542751371-adc38448a05e'), backdropImage: art('photo-1550745165-9bc0b252726f'),
-    screenshots: [art('photo-1603481546238-487240415921')], developer: 'Riot Games', sizeEstimate: '30 GB',
-    minimumRequirements: req('Intel Core 2 Duo E8400', '4 GB RAM', 'Intel HD 4000'),
+    id: 'watch-dogs-2', title: 'Watch Dogs 2', tagline: 'Hack the world around you.', description: 'Join Marcus Holloway and DedSec in a vibrant San Francisco open world built around hacking, stealth and creative disruption.',
+    genres: ['action', 'open-world'], performanceCategory: 'mid-range', releaseYear: 2016,
+    coverImage: externalArt('https://i.pinimg.com/1200x/d0/45/77/d0457748359d16916afdc996735110b0.jpg'), backdropImage: externalArt('https://i.pinimg.com/1200x/21/42/2f/21422faf660d121a733ba97d9adff1f3.jpg'),
+    screenshots: [externalArt('https://i.pinimg.com/1200x/21/42/2f/21422faf660d121a733ba97d9adff1f3.jpg'), externalArt('https://i.pinimg.com/1200x/8d/da/28/8dda28ea752c11e08e4d9c8a3da50d18.jpg'), externalArt('https://i.pinimg.com/1200x/d0/45/77/d0457748359d16916afdc996735110b0.jpg')], developer: 'Ubisoft', sizeEstimate: '27 GB',
+    minimumRequirements: req('Intel Core i5-2400S / AMD FX 6120', '6 GB RAM', 'GTX 660 / Radeon HD 7870'),
   },
   {
     id: 'cyberpunk-2077', title: 'Cyberpunk 2077', tagline: 'Become an urban legend.', description: 'Enter Night City, a megalopolis obsessed with power, glamour and body modification.',
-    genres: ['action', 'rpg'], performanceCategory: 'high-end', releaseYear: 2023, rating: 4.6, likes: 998,
+    genres: ['action', 'rpg'], performanceCategory: 'high-end', releaseYear: 2023,
     coverImage: art('photo-1519608487953-e999c86e7455'), backdropImage: art('photo-1519608487953-e999c86e7455'),
     screenshots: [art('photo-1535223289827-42f1e9919769')], developer: 'CD Projekt Red', sizeEstimate: '100 GB',
     minimumRequirements: req('Core i7-6700 / Ryzen 5 1600', '12 GB RAM', 'GTX 1060 6GB / RX 580'),
@@ -103,7 +103,7 @@ const showcaseGames: Game[] = [
 ];
 
 type VaultInput = Pick<Game, 'id' | 'title' | 'genres' | 'performanceCategory' | 'releaseYear'> &
-  Partial<Pick<Game, 'tagline' | 'developer' | 'franchise' | 'sizeEstimate' | 'vaultSize' | 'minimumRequirements' | 'recommendedRequirements' | 'description' | 'longDescription'>> & { art: string };
+  Partial<Pick<Game, 'tagline' | 'developer' | 'franchise' | 'sizeEstimate' | 'vaultSize' | 'minimumRequirements' | 'recommendedRequirements' | 'description' | 'longDescription'>> & { art: string; coverImageUrl?: string };
 
 const tierRequirements = (tier: Game['performanceCategory']): { minimum: HardwareRequirements; recommended: HardwareRequirements } => {
   if (tier === 'low-end') return {
@@ -120,14 +120,12 @@ const tierRequirements = (tier: Game['performanceCategory']): { minimum: Hardwar
   };
 };
 
-const vaultGame = ({ art: artwork, ...game }: VaultInput): Game => ({
+const vaultGame = ({ art: artwork, coverImageUrl, ...game }: VaultInput): Game => ({
   ...game,
   tagline: game.tagline,
   description: game.description ?? `${game.title} is a ${game.genres.slice(0, 2).join(' and ')} game built around exploration, challenge and memorable play.`,
   longDescription: game.longDescription ?? `${game.title} brings its ${game.genres.slice(0, 2).join(' and ')} identity to a focused world of missions, encounters and progression.`,
-  rating: 0,
-  likes: 0,
-  coverImage: art(artwork),
+  coverImage: coverImageUrl ?? art(artwork),
   backdropImage: art(artwork),
   screenshots: [art(artwork)],
   available: true,
@@ -136,12 +134,13 @@ const vaultGame = ({ art: artwork, ...game }: VaultInput): Game => ({
   recommendedRequirements: game.recommendedRequirements ?? tierRequirements(game.performanceCategory).recommended,
 });
 
-const vaultCatalog: Game[] = [
+export const libraryGames: Game[] = [
   vaultGame({ id: 'assassins-creed-black-flag', title: "Assassin's Creed IV Black Flag", genres: ['action', 'adventure', 'stealth'], performanceCategory: 'low-end', releaseYear: 2013, developer: 'Ubisoft', franchise: "Assassin's Creed", art: 'photo-1518709268805-4e9042af9f23', vaultSize: 'tall' }),
   vaultGame({ id: 'assassins-creed-origins', title: "Assassin's Creed Origins", genres: ['action', 'adventure', 'stealth'], performanceCategory: 'mid-range', releaseYear: 2017, developer: 'Ubisoft', franchise: "Assassin's Creed", art: 'photo-1531297484001-80022131f5a1', vaultSize: 'wide' }),
   vaultGame({ id: 'avatar-legends', title: 'Avatar Legends', genres: ['action', 'adventure', 'open-world'], performanceCategory: 'high-end', releaseYear: 2023, franchise: 'Avatar', art: 'photo-1446776811953-b23d57bd21aa', vaultSize: 'wide' }),
   vaultGame({ id: 'detroit-become-human', title: 'Detroit: Become Human', genres: ['adventure'], performanceCategory: 'mid-range', releaseYear: 2019, developer: 'Quantic Dream', art: 'photo-1519608487953-e999c86e7455' }),
   vaultGame({ id: 'euro-truck-simulator-2', title: 'Euro Truck Simulator 2', genres: ['simulation'], performanceCategory: 'low-end', releaseYear: 2012, developer: 'SCS Software', art: 'photo-1471479917193-f00955256257', vaultSize: 'wide' }),
+  vaultGame({ id: 'far-cry-6', title: 'Far Cry 6', tagline: 'The fight for freedom starts here.', genres: ['action', 'adventure', 'open-world'], performanceCategory: 'mid-range', releaseYear: 2021, developer: 'Ubisoft Toronto', franchise: 'Far Cry', art: 'photo-1518709268805-4e9042af9f23', sizeEstimate: '60 GB', minimumRequirements: req('Intel Core i5-4460 / AMD Ryzen 3 1200', '8 GB RAM', 'GTX 960 / Radeon RX 460', '60 GB available space'), recommendedRequirements: req('Intel Core i7-7700 / AMD Ryzen 5 3600X', '16 GB RAM', 'GTX 1080 / Radeon RX Vega 64', '60 GB available space') }),
   vaultGame({ id: 'fifa-19', title: 'FIFA 19', genres: ['sports'], performanceCategory: 'low-end', releaseYear: 2018, franchise: 'FIFA / FC', art: 'photo-1461896836934-ffe607ba8211' }),
   vaultGame({ id: 'fifa-22', title: 'FIFA 22', genres: ['sports'], performanceCategory: 'mid-range', releaseYear: 2021, franchise: 'FIFA / FC', art: 'photo-1518604666860-9ed391f76460', vaultSize: 'tall' }),
   vaultGame({ id: 'fc-26', title: 'EA Sports FC 26', genres: ['sports'], performanceCategory: 'mid-range', releaseYear: 2025, franchise: 'FIFA / FC', art: 'photo-1553778263-73a83bab9b0c' }),
@@ -157,7 +156,7 @@ const vaultCatalog: Game[] = [
   vaultGame({ id: 'sekiro-shadows-die-twice', title: 'Sekiro: Shadows Die Twice', genres: ['action', 'adventure', 'stealth'], performanceCategory: 'mid-range', releaseYear: 2019, developer: 'FromSoftware', art: 'photo-1518709268805-4e9042af9f23' }),
   vaultGame({ id: 'sleeping-dogs', title: 'Sleeping Dogs', genres: ['action', 'open-world'], performanceCategory: 'low-end', releaseYear: 2014, developer: 'United Front Games', art: 'photo-1519608487953-e999c86e7455' }),
   vaultGame({ id: 'red-dead-redemption-2', title: 'Red Dead Redemption 2', genres: ['action', 'adventure', 'open-world'], performanceCategory: 'high-end', releaseYear: 2019, developer: 'Rockstar Games', art: 'photo-1511497584788-876760111969', vaultSize: 'wide' }),
-  vaultGame({ id: 'uncharted-legacy-of-thieves', title: 'Uncharted: Legacy of Thieves', genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2022, developer: 'Naughty Dog', art: 'photo-1500534623283-312aade485b7' }),
+  vaultGame({ id: 'uncharted-legacy-of-thieves', title: 'Uncharted: Legacy of Thieves', genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2022, developer: 'Naughty Dog', art: 'photo-1500534623283-312aade485b7', coverImageUrl: 'https://i.pinimg.com/736x/21/fd/41/21fd41b2de23a2aec533cf88ed1d5d0b.jpg' }),
   vaultGame({ id: 'mafia-3', title: 'Mafia III', genres: ['action', 'open-world'], performanceCategory: 'mid-range', releaseYear: 2016, developer: 'Hangar 13', art: 'photo-1518005020951-eccb494ad742' }),
   vaultGame({ id: 'black-myth-wukong', title: 'Black Myth: Wukong', genres: ['action', 'rpg'], performanceCategory: 'high-end', releaseYear: 2024, developer: 'Game Science', art: 'photo-1518709268805-4e9042af9f23', vaultSize: 'tall' }),
   vaultGame({ id: 'pragmata', title: 'Pragmata', genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2026, developer: 'Capcom', art: 'photo-1446776877081-d282a0f896e2' }),
@@ -165,21 +164,21 @@ const vaultCatalog: Game[] = [
   vaultGame({ id: 'resident-evil-5', title: 'Resident Evil 5', genres: ['action', 'horror'], performanceCategory: 'low-end', releaseYear: 2009, franchise: 'Resident Evil', art: 'photo-1511512578047-dfb367046420' }),
   vaultGame({ id: 'resident-evil-6', title: 'Resident Evil 6', genres: ['action', 'horror'], performanceCategory: 'low-end', releaseYear: 2013, franchise: 'Resident Evil', art: 'photo-1500530855697-b586d89ba3ee' }),
   vaultGame({ id: 'resident-evil-village', title: 'Resident Evil Village', genres: ['action', 'horror'], performanceCategory: 'high-end', releaseYear: 2021, franchise: 'Resident Evil', art: 'photo-1471479917193-f00955256257', vaultSize: 'wide' }),
-  vaultGame({ id: 'tomb-raider', title: 'Tomb Raider', genres: ['action', 'adventure'], performanceCategory: 'low-end', releaseYear: 2013, franchise: 'Tomb Raider', art: 'photo-1469474968028-56623f02e42e' }),
+  vaultGame({ id: 'tomb-raider', title: 'Tomb Raider', genres: ['action', 'adventure'], performanceCategory: 'low-end', releaseYear: 2013, franchise: 'Tomb Raider', art: 'photo-1469474968028-56623f02e42e', coverImageUrl: 'https://i.pinimg.com/1200x/30/a3/82/30a382056f8f7df672d1c4e904d33c6b.jpg' }),
   vaultGame({ id: 'shadow-of-the-tomb-raider', title: 'Shadow of the Tomb Raider', genres: ['action', 'adventure'], performanceCategory: 'mid-range', releaseYear: 2018, franchise: 'Tomb Raider', art: 'photo-1464822759023-fed622ff2c3b' }),
   vaultGame({ id: 'elden-ring', title: 'Elden Ring', genres: ['action', 'rpg', 'adventure'], performanceCategory: 'mid-range', releaseYear: 2022, developer: 'FromSoftware', art: 'photo-1518709268805-4e9042af9f23', vaultSize: 'wide' }),
   vaultGame({ id: 'god-of-war-ragnarok', title: 'God of War Ragnarök', genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2024, developer: 'Santa Monica Studio', art: 'photo-1511497584788-876760111969' }),
   vaultGame({ id: 'mad-max', title: 'Mad Max', genres: ['action', 'open-world'], performanceCategory: 'low-end', releaseYear: 2015, developer: 'Avalanche Studios', art: 'photo-1504215680853-026ed2a45def' }),
   vaultGame({ id: 'days-gone', title: 'Days Gone', genres: ['action', 'adventure', 'open-world'], performanceCategory: 'mid-range', releaseYear: 2021, developer: 'Bend Studio', art: 'photo-1518709268805-4e9042af9f23', minimumRequirements: req('Intel Core i5-2500K / AMD FX 6300', '8 GB RAM', 'GTX 780 / Radeon R9 290', '70 GB available space', 'Windows 10 64-bit', 'Version 11'), recommendedRequirements: req('Intel Core i7-4770K / AMD Ryzen 5 1500X', '16 GB RAM', 'GTX 1060 / Radeon RX 580', '70 GB available space', 'Windows 10 64-bit', 'Version 11') }),
   vaultGame({ id: 'ghost-of-tsushima', title: 'Ghost of Tsushima', genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2024, developer: 'Sucker Punch Productions / Nixxes Software', art: 'photo-1470770841072-f978cf4d019e', minimumRequirements: req('Intel Core i3-7100 / AMD Ryzen 3 1200', '8 GB RAM', 'GTX 960 / Radeon RX 5500 XT', '75 GB SSD', 'Windows 10 64-bit', 'Version 12'), recommendedRequirements: req('Intel Core i5-8600 / AMD Ryzen 5 3600', '16 GB RAM', 'RTX 2060 / Radeon RX 5600 XT', '75 GB SSD', 'Windows 10 64-bit', 'Version 12') }),
-  vaultGame({ id: 'the-witcher-3-wild-hunt', title: 'The Witcher 3: Wild Hunt', genres: ['rpg', 'action', 'adventure'], performanceCategory: 'mid-range', releaseYear: 2015, developer: 'CD Projekt Red', art: 'photo-1518709268805-4e9042af9f23', minimumRequirements: req('Intel Core i5-2500K / AMD Phenom II X4 940', '6 GB RAM', 'GTX 660 / Radeon HD 7870', '40 GB available space', 'Windows 7/8 64-bit', 'Version 11'), recommendedRequirements: req('Intel Core i7-3770 / AMD FX-8350', '8 GB RAM', 'GTX 770 / Radeon R9 290', '40 GB available space', 'Windows 7/8 64-bit', 'Version 11') }),
+  vaultGame({ id: 'the-witcher-3-wild-hunt', title: 'The Witcher 3: Wild Hunt', genres: ['rpg', 'action', 'adventure'], performanceCategory: 'mid-range', releaseYear: 2015, developer: 'CD Projekt Red', art: 'photo-1518709268805-4e9042af9f23', coverImageUrl: 'https://i.pinimg.com/1200x/8d/9a/b4/8d9ab4487caa9d48aa4e6a021394712a.jpg', minimumRequirements: req('Intel Core i5-2500K / AMD Phenom II X4 940', '6 GB RAM', 'GTX 660 / Radeon HD 7870', '40 GB available space', 'Windows 7/8 64-bit', 'Version 11'), recommendedRequirements: req('Intel Core i7-3770 / AMD FX-8350', '8 GB RAM', 'GTX 770 / Radeon R9 290', '40 GB available space', 'Windows 7/8 64-bit', 'Version 11') }),
   vaultGame({ id: 'injustice-gods-among-us', title: 'Injustice: Gods Among Us', genres: ['fighting', 'action'], performanceCategory: 'low-end', releaseYear: 2013, developer: 'NetherRealm Studios', art: 'photo-1542751371-adc38448a05e' }),
-  vaultGame({ id: 'mortal-kombat-1', title: 'Mortal Kombat 1', genres: ['fighting', 'action'], performanceCategory: 'high-end', releaseYear: 2023, developer: 'NetherRealm Studios', art: 'photo-1511512578047-dfb367046420' }),
-  vaultGame({ id: 'nba-2k27', title: 'NBA 2K27', genres: ['sports'], performanceCategory: 'high-end', releaseYear: 2026, franchise: 'NBA 2K', art: 'photo-1546519638-68e109498ffc' }),
-  vaultGame({ id: 'wwe-2k26', title: 'WWE 2K26', genres: ['sports', 'fighting'], performanceCategory: 'mid-range', releaseYear: 2026, franchise: 'WWE 2K', art: 'photo-1461896836934-ffe607ba8211' }),
+  vaultGame({ id: 'mortal-kombat-1', title: 'Mortal Kombat 1', genres: ['fighting', 'action'], performanceCategory: 'high-end', releaseYear: 2023, developer: 'NetherRealm Studios', art: 'photo-1511512578047-dfb367046420', coverImageUrl: 'https://i.pinimg.com/736x/16/42/34/1642343bf694bf1b507bb885f9b53ccc.jpg' }),
+  vaultGame({ id: 'nba-2k27', title: 'NBA 2K27', genres: ['sports'], performanceCategory: 'high-end', releaseYear: 2026, franchise: 'NBA 2K', art: 'photo-1546519638-68e109498ffc', coverImageUrl: 'https://i.pinimg.com/736x/20/78/f1/2078f1af2d5de1873e0d04f346f78146.jpg' }),
+  vaultGame({ id: 'wwe-2k26', title: 'WWE 2K26', genres: ['sports', 'fighting'], performanceCategory: 'mid-range', releaseYear: 2026, franchise: 'WWE 2K', art: 'photo-1461896836934-ffe607ba8211', coverImageUrl: 'https://i.pinimg.com/1200x/14/17/ae/1417aeaf51078f88a2678a962c59c284.jpg' }),
   vaultGame({ id: 'mafia-the-old-country', title: 'Mafia: The Old Country', genres: ['action', 'adventure'], performanceCategory: 'high-end', releaseYear: 2025, developer: 'Hangar 13', art: 'photo-1518005020951-eccb494ad742' }),
   vaultGame({ id: 'need-for-speed-rivals', title: 'Need for Speed Rivals', genres: ['racing', 'open-world'], performanceCategory: 'low-end', releaseYear: 2013, franchise: 'Need for Speed', art: 'photo-1503376780353-7e6692767b70' }),
   vaultGame({ id: 'shadow-fight-arena', title: 'Shadow Fight Arena', genres: ['fighting', 'action'], performanceCategory: 'low-end', releaseYear: 2020, developer: 'Nekki', art: 'photo-1518709268805-4e9042af9f23' }),
 ];
 
-export const games: Game[] = [...showcaseGames, ...vaultCatalog];
+export const games: Game[] = [...showcaseGames, ...libraryGames];

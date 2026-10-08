@@ -1,19 +1,34 @@
-import { Search } from 'lucide-react';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 type VaultHeroProps = {
-  query: string;
-  onQueryChange: (value: string) => void;
   poster: string;
 };
 
-export function VaultHero({ query, onQueryChange, poster }: VaultHeroProps) {
-  return <section className="vault-hero">
+export function VaultHero({ poster }: VaultHeroProps) {
+  const location = useLocation();
+  const fromPerformanceDropdown = (location.state as { fromPerformanceDropdown?: boolean } | null)?.fromPerformanceDropdown === true;
+  const transitionClass = fromPerformanceDropdown ? ' performance-tier-transition' : '';
+
+  useEffect(() => {
+    if (!fromPerformanceDropdown) return;
+
+    const scrollTimer = window.setTimeout(() => {
+      const gameWall = document.querySelector<HTMLElement>('.vault-wall');
+      if (!gameWall) return;
+      gameWall.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 850);
+
+    return () => window.clearTimeout(scrollTimer);
+  }, [fromPerformanceDropdown, location.key]);
+
+  return <section className={`vault-hero${transitionClass}`}>
     <img className="vault-hero-video" src={poster} alt="" aria-hidden="true" />
     <div className="vault-hero-shade" />
     <div className="vault-hero-grain" aria-hidden="true" />
     <div className="vault-hero-inner">
+      <p className="eyebrow">THE PLAYWISE LIBRARY</p>
       <h1>Your next game<br />starts <em>here.</em></h1>
-      <label className="vault-hero-search"><Search size={18} /><input value={query} onChange={(event) => onQueryChange(event.target.value)} placeholder="Search games, genres, franchises..." aria-label="Search the game library" /></label>
     </div>
   </section>;
 }

@@ -2,6 +2,7 @@ import { ChevronDown, Menu, Search, X, ArrowUpRight } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { genres } from '../../data/genres';
+import { BrandLogo } from './BrandLogo';
 
 const genreOrder = ['sports', 'racing', 'action', 'adventure', 'strategy', 'rpg'];
 
@@ -57,7 +58,7 @@ export function Navbar() {
 
   return <header className="navbar">
     <div className="navbar-inner">
-      <Link to="/" className="brand"><span className="brand-mark">P</span><span className="brand-name">playwise</span></Link>
+      <BrandLogo />
       <button className="mobile-toggle" onClick={() => setOpen(!open)} aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open}>{open ? <X /> : <Menu />}</button>
       <nav className={open ? 'nav-links open' : 'nav-links'} aria-label="Main navigation">
         <NavLink to="/explore" onClick={closeMobile}>Game library</NavLink>
@@ -81,7 +82,7 @@ export function Navbar() {
           </button>
           <div className={`nav-mega-menu nav-mega-performance${desktopMenu === 'performance' ? ' is-open' : ''}`} aria-label="Find your performance level">
             <div className="nav-performance-list">
-              {performanceLinks.map((item) => <Link key={item.label} to={item.to} onClick={closeMobile} className="nav-menu-item nav-performance-item">
+              {performanceLinks.map((item) => <Link key={item.label} to={item.to} state={{ fromPerformanceDropdown: true }} onClick={closeMobile} className="nav-menu-item nav-performance-item">
                 <span className="nav-performance-copy"><b>{item.label.toUpperCase()}</b></span>
                 <ArrowUpRight size={15} />
               </Link>)}
@@ -95,7 +96,7 @@ export function Navbar() {
           </div>
           <button type="button" className={`nav-mobile-section-trigger${mobileSection === 'performance' ? ' is-expanded' : ''}`} aria-expanded={mobileSection === 'performance'} onClick={() => setMobileSection(mobileSection === 'performance' ? null : 'performance')}>Performance <span>{mobileSection === 'performance' ? '−' : '+'}</span></button>
           <div className={`nav-mobile-section${mobileSection === 'performance' ? ' is-open' : ''}`}>
-            {performanceLinks.map((item) => <Link key={item.label} to={item.to} onClick={closeMobile}>{item.label}<ArrowUpRight size={14} /></Link>)}
+            {performanceLinks.map((item) => <Link key={item.label} to={item.to} state={{ fromPerformanceDropdown: true }} onClick={closeMobile}>{item.label}<ArrowUpRight size={14} /></Link>)}
           </div>
         </div>
         <NavLink to="/high-end" onClick={closeMobile}>High-end picks</NavLink>

@@ -1,8 +1,9 @@
-import { games } from '../data/games';
-import { PageContainer } from '../components/layout/PageContainer';
-import { GameGrid } from '../components/games/GameGrid';
-import { PageHero } from '../components/layout/PageHero';
+import { libraryGames } from '../data/games';
+import { VaultHero } from '../components/library/VaultHero';
+import { VaultGameWall } from '../components/library/VaultGameWall';
+import { siteConfig } from '../config/siteConfig';
 
 export function LowEndGames() {
-  return <PageContainer><PageHero eyebrow="MADE FOR MORE PCS" title="Low-end games" description="Fantastic adventures that run smoothly on everyday hardware." image={games[2].backdropImage} /><GameGrid games={games.filter((game) => game.performanceCategory === 'low-end')} /></PageContainer>;
+  const lowEndGames = libraryGames.filter((game) => game.performanceCategory === 'low-end');
+  return <main className="vault-page"><VaultHero poster={siteConfig.libraryBanner} /><div className="vault-main"><VaultGameWall games={lowEndGames} /></div></main>;
 }

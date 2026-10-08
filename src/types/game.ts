@@ -19,8 +19,6 @@ export interface Game {
   genres: string[];
   performanceCategory: PerformanceTier;
   releaseYear: number;
-  rating: number; // 0.0 to 5.0
-  likes: number;
   coverImage: string;
   backdropImage: string;
   screenshots: string[];
