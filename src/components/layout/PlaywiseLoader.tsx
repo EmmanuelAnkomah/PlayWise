@@ -1,7 +1,6 @@
-import { useEffect, useState, type CSSProperties } from 'react';
-import { loaderGalleryImages } from '../../data/loaderGallery';
+import { useEffect, useState } from 'react';
 
-const tileSpans = ['wide', 'tall', '', 'square', 'wide', '', 'tall', '', 'square', 'wide', '', 'tall'];
+const loaderImage = 'https://i.pinimg.com/1200x/44/60/1d/44601d3009836bf25a172ab85900f9bf.jpg';
 
 export function PlaywiseLoader({ onComplete }: { onComplete: () => void }) {
   const [isLeaving, setIsLeaving] = useState(false);
@@ -16,9 +15,7 @@ export function PlaywiseLoader({ onComplete }: { onComplete: () => void }) {
   }, [onComplete]);
 
   return <div className={`playwise-loader${isLeaving ? ' is-leaving' : ''}`} aria-label="Loading Playwise" role="status">
-    <div className="loader-gallery" aria-hidden="true">
-      {loaderGalleryImages.map((image, index) => <div className={`loader-tile ${image.span ?? tileSpans[index % tileSpans.length]}`} key={`${image.src}-${index}`} style={{ '--tile-index': index } as CSSProperties}><img src={image.src} alt="" decoding="async" /></div>)}
-    </div>
+    <img className="loader-image" src={loaderImage} alt="" aria-hidden="true" decoding="async" fetchPriority="high" />
     <div className="loader-vignette" aria-hidden="true" />
     <div className="loader-center">
       <div className="loader-lockup">
