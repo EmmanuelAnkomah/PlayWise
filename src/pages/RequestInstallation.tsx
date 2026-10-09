@@ -2,11 +2,12 @@ import { ArrowRight, ChevronRight, Gamepad2, ShieldCheck } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
 import { games } from '../data/games';
+import { siteConfig } from '../config/siteConfig';
 import { InstallationForm } from '../components/contact/InstallationForm';
 import { CinematicGameplaySection } from '../components/request/CinematicGameplaySection';
 import type { InstallationRequestPayload } from '../types/game';
 
-const requestHeroFallback = 'https://i.pinimg.com/236x/86/cf/97/86cf9715f5fb715001c2eab64984b4ce.jpg';
+const requestHeroFallback = siteConfig.requestVideoPoster;
 
 export function RequestInstallation() {
   const [params] = useSearchParams();

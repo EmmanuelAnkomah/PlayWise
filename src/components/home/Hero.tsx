@@ -22,7 +22,7 @@ export function Hero() {
 
   return (
     <section className="hero" ref={heroRef} onPointerMove={moveWithPointer} onPointerLeave={resetPointer}>
-      <video className="hero-video" autoPlay muted loop playsInline poster="https://i.pinimg.com/1200x/4e/02/b9/4e02b987da9d2c3a8c27abc9afb3746a.jpg" aria-hidden="true">
+      <video className="hero-video" autoPlay muted loop playsInline poster={siteConfig.heroVideoPoster} aria-hidden="true">
         <source src={siteConfig.heroVideo} type="video/mp4" />
       </video>
       <div className="hero-overlay" />

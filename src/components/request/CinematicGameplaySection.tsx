@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Maximize2, Pause, Play, Volume2, VolumeX } from 'lucide-react';
+import { siteConfig } from '../../config/siteConfig';
 
 const gameplayVideo = 'https://res.cloudinary.com/ctapnkmr/video/upload/v1788973528/Pragmata.mp4';
 
@@ -86,7 +87,7 @@ export function CinematicGameplaySection() {
         <p>From request to first launch, every step stays clear and effortless.</p>
       </div>
       <div className="gameplay-frame">
-        <video ref={videoRef} className="gameplay-video" preload="metadata" playsInline onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)} onTimeUpdate={(event) => setProgress(event.currentTarget.duration ? event.currentTarget.currentTime / event.currentTarget.duration : 0)} onEnded={() => setIsPlaying(false)} aria-label="Pragmata gameplay preview">
+        <video ref={videoRef} className="gameplay-video" preload="metadata" playsInline poster={siteConfig.gameplayVideoPoster} onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)} onTimeUpdate={(event) => setProgress(event.currentTarget.duration ? event.currentTarget.currentTime / event.currentTarget.duration : 0)} onEnded={() => setIsPlaying(false)} aria-label="Pragmata gameplay preview">
           <source src={gameplayVideo} type="video/mp4" />
         </video>
         {autoplayBlocked && !hasUserStarted && <button className="gameplay-sound-prompt" type="button" onClick={playWithSound}><Volume2 size={17} /> Play with sound</button>}
