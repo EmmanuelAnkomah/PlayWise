@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import libBanner from '../../assets/Local-images/lib-banner.webp';
 
 type VaultHeroProps = {
-  poster: string;
+  poster?: string;
 };
 
-export function VaultHero({ poster }: VaultHeroProps) {
+export function VaultHero({ poster = libBanner }: VaultHeroProps) {
   const location = useLocation();
   const fromPerformanceDropdown = (location.state as { fromPerformanceDropdown?: boolean } | null)?.fromPerformanceDropdown === true;
   const transitionClass = fromPerformanceDropdown ? ' performance-tier-transition' : '';
@@ -23,7 +24,14 @@ export function VaultHero({ poster }: VaultHeroProps) {
   }, [fromPerformanceDropdown, location.key]);
 
   return <section className={`vault-hero${transitionClass}`}>
-    <img className="vault-hero-video" src={poster} alt="" aria-hidden="true" />
+    <img
+      className="vault-hero-video"
+      src={poster || libBanner}
+      alt="PlayWise Library Banner"
+      aria-hidden="true"
+      loading="eager"
+      decoding="async"
+    />
     <div className="vault-hero-shade" />
     <div className="vault-hero-grain" aria-hidden="true" />
     <div className="vault-hero-inner">

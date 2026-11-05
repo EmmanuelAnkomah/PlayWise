@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { OptimizedImage } from '../components/ui/OptimizedImage';
 import { games } from '../data/games';
 import { Button } from '../components/ui/Button';
 import { GameGallery } from '../components/games/GameGallery';
@@ -176,7 +177,8 @@ const researchedAbout: Record<string, string> = {
 function FeaturedGameDetails({ game, details }: { game: typeof games[number]; details: FeaturedDetails }) {
   const galleryGame = { ...game, screenshots: details.screenshots };
   return <main className="featured-detail-page">
-    <section className="featured-detail-hero" style={{ backgroundImage: `linear-gradient(90deg, rgba(5,12,11,.96), rgba(5,12,11,.58) 58%, rgba(5,12,11,.14)), url(${details.heroImage ?? game.coverImage})` }}>
+    <section className="featured-detail-hero">
+      <OptimizedImage className="featured-detail-hero-image" src={details.heroImage ?? game.coverImage} alt="" aria-hidden="true" loading="eager" fetchPriority="high" decoding="async" fallbackSrc={game.coverImage} />
       <div className="featured-detail-hero-inner"><Link className="featured-detail-back" to="/explore">← Back to game library</Link><h1>{game.title}</h1>{game.tagline && <p className="featured-detail-tagline">{game.tagline}</p>}<Button className="featured-detail-install-button" to={`/request-installation?game=${game.id}`}>Request installation <ArrowRight size={16} /></Button></div>
       <div className="featured-detail-meta"><span>{game.developer}</span><span>{game.releaseYear}</span><span>{game.platform ?? 'PC'}</span></div>
     </section>

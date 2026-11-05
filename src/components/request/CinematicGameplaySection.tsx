@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Maximize2, Pause, Play, Volume2, VolumeX } from 'lucide-react';
-import { siteConfig } from '../../config/siteConfig';
-
-const gameplayVideo = 'https://res.cloudinary.com/ctapnkmr/video/upload/v1788973528/Pragmata.mp4';
+import fc1Video from '../../assets/req-vid/FC_1.mp4';
 
 export function CinematicGameplaySection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -87,16 +85,44 @@ export function CinematicGameplaySection() {
         <p>From request to first launch, every step stays clear and effortless.</p>
       </div>
       <div className="gameplay-frame">
-        <video ref={videoRef} className="gameplay-video" preload="metadata" playsInline poster={siteConfig.gameplayVideoPoster} onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)} onTimeUpdate={(event) => setProgress(event.currentTarget.duration ? event.currentTarget.currentTime / event.currentTarget.duration : 0)} onEnded={() => setIsPlaying(false)} aria-label="Pragmata gameplay preview">
-          <source src={gameplayVideo} type="video/mp4" />
+        <video
+          ref={videoRef}
+          className="gameplay-video"
+          preload="metadata"
+          playsInline
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+          onTimeUpdate={(event) => setProgress(event.currentTarget.duration ? event.currentTarget.currentTime / event.currentTarget.duration : 0)}
+          onEnded={() => setIsPlaying(false)}
+          aria-label="PlayWise cinematic preview"
+        >
+          <source src={fc1Video} type="video/mp4" />
         </video>
-        {autoplayBlocked && !hasUserStarted && <button className="gameplay-sound-prompt" type="button" onClick={playWithSound}><Volume2 size={17} /> Play with sound</button>}
+        {autoplayBlocked && !hasUserStarted && (
+          <button className="gameplay-sound-prompt" type="button" onClick={playWithSound}>
+            <Volume2 size={17} /> Play with sound
+          </button>
+        )}
         <div className="gameplay-controls">
-          <button type="button" onClick={togglePlayback} aria-label={isPlaying ? 'Pause gameplay' : 'Play gameplay'}>{isPlaying ? <Pause size={16} /> : <Play size={16} />}</button>
-          <input type="range" min="0" max="1" step=".001" value={progress} onChange={(event) => setVideoProgress(Number(event.target.value))} aria-label="Gameplay progress" />
-          <button type="button" onClick={toggleMute} aria-label={isMuted ? 'Unmute gameplay' : 'Mute gameplay'}>{isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}</button>
+          <button type="button" onClick={togglePlayback} aria-label={isPlaying ? 'Pause gameplay' : 'Play gameplay'}>
+            {isPlaying ? <Pause size={16} /> : <Play size={16} />}
+          </button>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step=".001"
+            value={progress}
+            onChange={(event) => setVideoProgress(Number(event.target.value))}
+            aria-label="Gameplay progress"
+          />
+          <button type="button" onClick={toggleMute} aria-label={isMuted ? 'Unmute gameplay' : 'Mute gameplay'}>
+            {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+          </button>
           <span className="gameplay-sound-status">{isMuted ? 'SOUND OFF' : 'SOUND ON'}</span>
-          <button type="button" onClick={() => videoRef.current?.requestFullscreen()} aria-label="View gameplay fullscreen"><Maximize2 size={16} /></button>
+          <button type="button" onClick={() => videoRef.current?.requestFullscreen()} aria-label="View gameplay fullscreen">
+            <Maximize2 size={16} />
+          </button>
         </div>
       </div>
     </section>

@@ -1,0 +1,1 @@
+export { ScrollHero } from './ScrollHero';
