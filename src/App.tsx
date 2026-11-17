@@ -11,6 +11,7 @@ import { GameDetails } from './pages/GameDetails';
 import { RequestInstallation } from './pages/RequestInstallation';
 import { Contact } from './pages/Contact';
 import { PlaywiseLoader } from './components/layout/PlaywiseLoader';
+import { Seo } from './components/seo/Seo';
 
 function RouteScrollReset() {
   const { pathname, hash } = useLocation();
@@ -30,7 +31,7 @@ function App() {
     sessionStorage.setItem('playwise-loader-seen', 'true');
     setShowLoader(false);
   };
-  return <BrowserRouter><RouteScrollReset /><Navbar /><Routes><Route path="/" element={<Home />} /><Route path="/explore" element={<Explore />} /><Route path="/genres" element={<Genres />} /><Route path="/low-end" element={<LowEndGames />} /><Route path="/high-end" element={<HighEndGames />} /><Route path="/games/:id" element={<GameDetails />} /><Route path="/request-installation" element={<RequestInstallation />} /><Route path="/contact" element={<Contact />} /></Routes><Footer />{showLoader && <PlaywiseLoader onComplete={finishLoader} />}</BrowserRouter>;
+  return <BrowserRouter><Seo /><RouteScrollReset /><Navbar /><Routes><Route path="/" element={<Home />} /><Route path="/explore" element={<Explore />} /><Route path="/genres" element={<Genres />} /><Route path="/low-end" element={<LowEndGames />} /><Route path="/high-end" element={<HighEndGames />} /><Route path="/games/:id" element={<GameDetails />} /><Route path="/request-installation" element={<RequestInstallation />} /><Route path="/contact" element={<Contact />} /></Routes><Footer />{showLoader && <PlaywiseLoader onComplete={finishLoader} />}</BrowserRouter>;
 }
 
 export default App;

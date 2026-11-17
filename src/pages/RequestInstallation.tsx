@@ -27,7 +27,7 @@ export function RequestInstallation() {
         <img
           className="request-hero-image"
           src={heroBanner}
-          alt="PlayWise Installation Desk"
+          alt=""
           aria-hidden="true"
           loading="eager"
           decoding="async"
@@ -37,7 +37,7 @@ export function RequestInstallation() {
           <div className="request-hero-copy">
             <p className="eyebrow">PLAYWISE INSTALLATION DESK</p>
             <h1>Request a<br /><em>game.</em></h1>
-            <p>Tell us which game you want and a few details about your PC. We’ll review your request and get back to you with the next steps.</p>
+            <p>Tell us which game you want and a few details about your PC. We help gamers in Ghana by reviewing your request and explaining the next steps.</p>
             <div className="request-hero-actions">
               <a className="request-pill request-pill-acid" href="#installation-form">Start your request <ArrowRight size={16} /></a>
               <Link className="request-text-link" to="/explore">Browse the library <ChevronRight size={16} /></Link>

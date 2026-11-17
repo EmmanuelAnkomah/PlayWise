@@ -4,6 +4,7 @@ import fc1Video from '../assets/req-vid/FC_1.mp4';
 
 export const siteConfig = {
   name: 'PLAYWISE',
+  url: 'https://www.playwise.tech',
   tagline: 'DISCOVER. INSTALL. PLAY.',
   subTagline: 'Your next game is waiting.',
   description:

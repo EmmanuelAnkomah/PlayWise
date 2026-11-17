@@ -23,7 +23,7 @@ export function Contact() {
             <p className="eyebrow">PLAYWISE SUPPORT</p>
             <h1>Need a <em>hand?</em></h1>
             <h2>We’re here to assist you.</h2>
-            <p>Whether you are looking for a game, checking whether your PC can handle it, requesting an installation, or running into an issue, our team is ready to help.</p>
+            <p>Whether you are looking for a game in Ghana, checking whether your PC can handle it, requesting an installation, or running into an issue, our team is ready to help.</p>
             <div className="support-hero-actions"><a className="support-button support-button-lime" href="#support-options">Get support <ArrowRight size={17} /></a><Link className="support-button support-button-light" to="/explore">Browse the library <ArrowRight size={17} /></Link></div>
           </motion.div>
           <div className="support-hero-status"><span><i /> PlayWise</span><span>Support</span></div>

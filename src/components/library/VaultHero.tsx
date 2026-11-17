@@ -27,7 +27,7 @@ export function VaultHero({ poster = libBanner }: VaultHeroProps) {
     <img
       className="vault-hero-video"
       src={poster || libBanner}
-      alt="PlayWise Library Banner"
+      alt=""
       aria-hidden="true"
       loading="eager"
       decoding="async"

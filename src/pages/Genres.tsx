@@ -42,7 +42,7 @@ export function Genres() {
           {orderedGenres.map((genre) => {
             return <motion.div key={genre.id} className={`genre-card genre-card-${genre.id}`} variants={reducedMotion ? undefined : genreCardVariants} transition={reducedMotion ? { duration: 0 } : { duration: .48, ease: [0.22, 1, 0.36, 1] }}>
               <Link to={`/explore?genre=${genre.id}`} aria-label={`Explore ${genre.name} games`}>
-                <img src={genre.image} alt="" loading="lazy" />
+                <img src={genre.image} alt={`${genre.name} PC games`} loading="lazy" />
                 <div className="genre-card-shade" />
                 <div className="genre-card-content"><span>{categoryLabels[genre.id]}</span><h2>{genre.name.toUpperCase()}</h2></div>
                 <span className="genre-card-cta">EXPLORE <ArrowRight size={15} /></span>

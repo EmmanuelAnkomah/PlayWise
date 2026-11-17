@@ -20,6 +20,7 @@
   --shadow: 0 24px 70px rgba(0, 8, 22, .48);
 }
 * { box-sizing: border-box; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 html { scroll-behavior: smooth; }
 body { margin: 0; min-width: 320px; overflow-x: hidden; background: radial-gradient(circle at 80% 0%, #122b49 0, transparent 35%), var(--bg); }
 a { color: inherit; text-decoration: none; }
