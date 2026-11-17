@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 
-const baseUrl = 'https://www.playwise.tech';
+const baseUrl = 'https://playwise.tech';
 const gamesSource = readFileSync(new URL('../src/data/games.ts', import.meta.url), 'utf8');
 const gameIds = [...gamesSource.matchAll(/\bid:\s*'([^']+)'/g)].map((match) => match[1]);
 const paths = ['/', '/explore', '/genres', '/low-end', '/high-end', '/request-installation', '/contact', ...gameIds.map((id) => `/games/${id}`)];

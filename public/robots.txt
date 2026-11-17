@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.playwise.tech/sitemap.xml
+Sitemap: https://playwise.tech/sitemap.xml
