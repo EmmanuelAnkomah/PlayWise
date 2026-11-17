@@ -4,6 +4,9 @@
  * Replaces the original Hero component with a cinematic controller reveal.
  * The user scrolls down to advance frames (assembled → exploded view),
  * scrolls up to reverse, with a sticky viewport pinning the canvas.
+ *
+ * Lyric-style captions change with scroll progress — simple fade + translate,
+ * like changing lyrics on an Instagram Story.
  */
 
 import { useEffect, useRef } from 'react';
@@ -21,17 +24,26 @@ interface Caption {
   text: string;
 }
 
+/**
+ * 8 captions spread across the full scroll range.
+ * Each caption gets ~12.5% of scroll travel, with the frame sequence
+ * advancing ~25 frames per caption change. This keeps the visual
+ * pacing smooth — the controller opens gradually while the text
+ * tells the product story.
+ */
 const CAPTIONS: Caption[] = [
-  { start: 0.08, end: 0.25, text: 'Engineered from the inside out.' },
-  { start: 0.25, end: 0.45, text: 'Every input. Every sensor.' },
-  { start: 0.45, end: 0.65, text: 'Power in motion.' },
-  { start: 0.65, end: 0.85, text: 'A system built for precision.' },
-  { start: 0.85, end: 1.0, text: 'Every component. One experience.' },
+  { start: 0.00, end: 0.12, text: 'Play something you\u2019ll love' },
+  { start: 0.12, end: 0.24, text: 'A sharper way to discover PC games' },
+  { start: 0.24, end: 0.36, text: 'that fit your taste and setup' },
+  { start: 0.36, end: 0.50, text: 'Precision-built for every gamer' },
+  { start: 0.50, end: 0.62, text: 'Crafted down to the last detail' },
+  { start: 0.62, end: 0.74, text: 'More play less searching' },
+  { start: 0.74, end: 0.87, text: 'Three hardware tiers' },
+  { start: 0.87, end: 1.00, text: 'Your next adventure starts here' },
 ];
 
 /* ---------- Reduced motion check ------------------------------------------ */
 
-/** Snapshot once at module level — avoids reading a ref during render. */
 const PREFERS_REDUCED_MOTION =
   typeof window !== 'undefined'
     ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -67,13 +79,38 @@ function drawImageToCanvas(
   ctx.drawImage(img, sx, sy, sw, sh, 0, 0, cw, ch);
 }
 
+function setCaptionText(element: HTMLSpanElement, text: string) {
+  const words = text.split(' ');
+  const accent = words.pop() ?? '';
+  element.replaceChildren(
+    document.createTextNode(`${words.join(' ')}${words.length ? ' ' : ''}`),
+    Object.assign(document.createElement('em'), {
+      className: 'scroll-hero-accent',
+      textContent: accent,
+    }),
+  );
+}
+
 /* ---------- Component ------------------------------------------------------ */
 
 /**
- * The outer section provides ~220vh of scroll distance for the animation.
- * A sticky viewport occupies 100vh and holds the canvas + text overlays.
+ * Scroll-height calculation:
+ *
+ * The sticky child is 100vh. The outer section must be tall enough to provide
+ * the FULL scroll range before the sticky element un-pins.
+ *
+ * With 200 frames at ~12 px per frame on a 1080px viewport:
+ *   200 × 12 = 2400 px of scroll travel needed.
+ *   2400 / 1080 ≈ 2.22 viewports of travel.
+ *   Section height = travel + viewport = ~3.22 viewports ≈ 320 vh.
+ *
+ * Using 320vh: gives 220vh of scroll travel, which at 1080px = 2376px,
+ * or ~12 px/frame. Comfortable and precise.
  */
-const SCROLL_HEIGHT_VH = 220;
+// Keep enough travel for every frame to render while the viewport remains pinned.
+// The extra room prevents the sticky element releasing on the final frame on
+// taller desktop displays.
+const SCROLL_HEIGHT_VH = 360;
 
 export function ScrollHero() {
   const prefersReducedMotion = PREFERS_REDUCED_MOTION;
@@ -85,10 +122,11 @@ export function ScrollHero() {
   const stickyRef = useRef<HTMLDivElement>(null);
   const currentFrame = useRef(0);
 
-  // Text overlay refs (manipulate style directly to avoid React re-renders)
-  const heroTextRef = useRef<HTMLDivElement>(null);
-  const captionRef = useRef<HTMLDivElement>(null);
-  const progressBarRef = useRef<HTMLDivElement>(null);
+  // Lyric caption refs (DOM manipulation to avoid React re-renders)
+  const lyricRef = useRef<HTMLDivElement>(null);
+  const lyricTextRef = useRef<HTMLSpanElement>(null);
+  const activeCaptionIndex = useRef(0);
+  const captionTimer = useRef<number | null>(null);
   const loadingRef = useRef<HTMLDivElement>(null);
 
   /* ---------- Canvas rendering -------------------------------------------- */
@@ -167,43 +205,66 @@ export function ScrollHero() {
       drawFrameRef.current(frameIndex);
       frameSequence.prioritizeAround(frameIndex);
 
-      // 2. Update hero text opacity (fade out in first 8% of scroll)
-      const heroText = heroTextRef.current;
-      if (heroText) {
-        const textOpacity = progress <= 0 ? 1 : progress >= 0.08 ? 0 : 1 - progress / 0.08;
-        heroText.style.opacity = String(textOpacity);
-        heroText.style.transform = `translateY(${(1 - textOpacity) * -20}px)`;
-        heroText.style.pointerEvents = textOpacity < 0.1 ? 'none' : 'auto';
-      }
+      // 2. Update lyric caption
+      const lyricEl = lyricRef.current;
+      const lyricText = lyricTextRef.current;
+      if (!lyricEl || !lyricText) return;
 
-      // 3. Update contextual caption
-      const captionEl = captionRef.current;
-      if (captionEl) {
-        let activeText = '';
-        let captionOpacity = 0;
-
-        for (const cap of CAPTIONS) {
-          if (progress >= cap.start && progress <= cap.end) {
-            activeText = cap.text;
-            const range = cap.end - cap.start;
-            const fadeIn = Math.min(1, (progress - cap.start) / (range * 0.15));
-            const fadeOut = Math.min(1, (cap.end - progress) / (range * 0.15));
-            captionOpacity = Math.min(fadeIn, fadeOut);
-            break;
-          }
+      // Find which caption is active
+      let newIndex = 0;
+      for (let i = 0; i < CAPTIONS.length; i++) {
+        if (progress >= CAPTIONS[i].start && progress <= CAPTIONS[i].end) {
+          newIndex = i;
+          break;
         }
-
-        captionEl.textContent = activeText;
-        captionEl.style.opacity = String(captionOpacity);
+        // If we're between captions (in transition gap), keep the last one
+        if (i > 0 && progress > CAPTIONS[i - 1].end && progress < CAPTIONS[i].start) {
+          newIndex = i;
+          break;
+        }
       }
 
-      // 4. Update progress bar
-      const bar = progressBarRef.current;
-      if (bar) {
-        bar.style.transform = `scaleX(${progress})`;
+      if (newIndex !== activeCaptionIndex.current) {
+        // Caption is changing — fade out, swap text, fade in
+        const prevIndex = activeCaptionIndex.current;
+        activeCaptionIndex.current = newIndex;
+
+        // Fade out with upward drift
+        lyricEl.style.opacity = '0';
+        lyricEl.style.transform = prevIndex < newIndex
+          ? 'translateY(-12px)'   // scrolling down: text exits upward
+          : 'translateY(12px)';   // scrolling up: text exits downward
+
+        // After CSS transition (200ms), swap text and fade in
+        if (captionTimer.current !== null) {
+          window.clearTimeout(captionTimer.current);
+        }
+        requestAnimationFrame(() => {
+          captionTimer.current = window.setTimeout(() => {
+            setCaptionText(lyricText, CAPTIONS[newIndex].text);
+            // Enter from opposite direction
+            lyricEl.style.transition = 'none';
+            lyricEl.style.transform = prevIndex < newIndex
+              ? 'translateY(12px)'   // enter from below
+              : 'translateY(-12px)'; // enter from above
+            lyricEl.style.opacity = '0';
+
+            // Force reflow then animate in
+            void lyricEl.offsetHeight;
+            lyricEl.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+            lyricEl.style.opacity = '1';
+            lyricEl.style.transform = 'translateY(0)';
+          }, 200);
+        });
       }
     });
-  }, [onTick, frameSequence]); // eslint-disable-line — drawFrame is stable within the component
+    return () => {
+      if (captionTimer.current !== null) {
+        window.clearTimeout(captionTimer.current);
+        captionTimer.current = null;
+      }
+    };
+  }, [onTick, frameSequence]);
 
   /* ---------- Reduced motion fallback ------------------------------------- */
 
@@ -212,36 +273,13 @@ export function ScrollHero() {
       <section className="scroll-hero-reduced" aria-label="PlayWise controller showcase">
         <div className="scroll-hero-reduced-inner">
           <div className="scroll-hero-reduced-bg" />
-          <div className="scroll-hero-text">
-            <p className="eyebrow">INTRODUCING PLAYWISE</p>
-            <h1>Precision.<br /><em>Beneath the surface.</em></h1>
-            <p className="scroll-hero-copy">Explore the engineering behind every move.</p>
-            <div className="scroll-hero-actions">
-              <button
-                className="pw-button pw-button-primary"
-                type="button"
-                onClick={() => {
-                  const next = document.querySelector('.home-intro');
-                  next?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                Explore the build
-              </button>
-            </div>
+          <div className="scroll-hero-lyric" style={{ position: 'relative', opacity: 1 }}>
+            <span>Play something you&rsquo;ll love</span>
           </div>
         </div>
       </section>
     );
   }
-
-  /* ---------- CTA handler ------------------------------------------------- */
-
-  const handleExplore = () => {
-    const section = sectionRef.current;
-    if (!section) return;
-    const target = section.offsetTop + section.offsetHeight * 0.12;
-    window.scrollTo({ top: target, behavior: 'smooth' });
-  };
 
   /* ---------- Render ------------------------------------------------------- */
 
@@ -249,7 +287,7 @@ export function ScrollHero() {
     <section
       ref={sectionRef}
       className="scroll-hero-section"
-      style={{ height: `${SCROLL_HEIGHT_VH}vh` }}
+      style={{ height: `max(100vh, ${SCROLL_HEIGHT_VH}vh)`, scrollSnapAlign: 'start' }}
       aria-label="PlayWise controller reveal"
     >
       {/* Sticky viewport */}
@@ -267,28 +305,9 @@ export function ScrollHero() {
           <span>Loading experience…</span>
         </div>
 
-        {/* Hero text overlay — fades out on scroll */}
-        <div ref={heroTextRef} className="scroll-hero-text">
-          <p className="eyebrow">INTRODUCING PLAYWISE</p>
-          <h1>Precision.<br /><em>Beneath the surface.</em></h1>
-          <p className="scroll-hero-copy">Explore the engineering behind every move.</p>
-          <div className="scroll-hero-actions">
-            <button
-              className="pw-button pw-button-primary"
-              onClick={handleExplore}
-              type="button"
-            >
-              Explore the build
-            </button>
-          </div>
-        </div>
-
-        {/* Contextual caption */}
-        <div ref={captionRef} className="scroll-hero-caption" aria-live="polite" />
-
-        {/* Progress bar */}
-        <div className="scroll-hero-progress-track">
-          <div ref={progressBarRef} className="scroll-hero-progress-bar" />
+        {/* Lyric-style caption — changes with scroll like Instagram Story lyrics */}
+        <div ref={lyricRef} className="scroll-hero-lyric" aria-live="polite">
+          <span ref={lyricTextRef}>Play something you&rsquo;ll <em className="scroll-hero-accent">love</em></span>
         </div>
       </div>
     </section>

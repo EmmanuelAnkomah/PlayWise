@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-
-const loaderImage = 'https://i.pinimg.com/1200x/44/60/1d/44601d3009836bf25a172ab85900f9bf.jpg';
+import loaderImage from '../../assets/Local-images/Loader-banner.webp';
 
 export function PlaywiseLoader({ onComplete }: { onComplete: () => void }) {
   const [isLeaving, setIsLeaving] = useState(false);

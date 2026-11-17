@@ -15,7 +15,7 @@ export interface ScrollProgressResult {
   progressRef: React.RefObject<number>;
   /** Current frame index (read from ref) */
   frameIndexRef: React.RefObject<number>;
-  /** Register a callback to be called on every animation-frame tick with (progress, frameIndex) */
+  /** Register the callback called on every animation-frame tick with (progress, frameIndex) */
   onTick: (cb: TickCallback) => void;
 }
 
@@ -25,12 +25,12 @@ export function useScrollProgress(frameCount: number): ScrollProgressResult {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const progressRef = useRef(0);
   const frameIndexRef = useRef(0);
-  const tickCallbacks = useRef<TickCallback[]>([]);
+  const tickCallback = useRef<TickCallback | null>(null);
   const rafId = useRef(0);
   const lastFrame = useRef(-1);
 
   const onTick = useCallback((cb: TickCallback) => {
-    tickCallbacks.current.push(cb);
+    tickCallback.current = cb;
   }, []);
 
   useEffect(() => {
@@ -66,9 +66,7 @@ export function useScrollProgress(frameCount: number): ScrollProgressResult {
       // Fire callbacks on every progress update (text opacity transitions need
       // continuous progress values, not just frame changes)
       lastFrame.current = clampedFrame;
-      for (const cb of tickCallbacks.current) {
-        cb(progress, clampedFrame);
-      }
+      tickCallback.current?.(progress, clampedFrame);
     };
 
     const onScroll = () => {
