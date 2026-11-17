@@ -1,12 +1,13 @@
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { Game } from '../../types/game';
+import { OptimizedImage } from '../ui/OptimizedImage';
 
-export function TrendingCard({ game, statusLabel }: { game: Game; statusLabel?: string }) {
+export function TrendingCard({ game, statusLabel, priority = false }: { game: Game; statusLabel?: string; priority?: boolean }) {
   return (
     <article className={`trending-card trending-card-${game.id}`}>
       <Link to={`/games/${game.id}`} className="trending-card-art">
-        <img src={game.coverImage} alt={`${game.title} artwork`} loading="lazy" />
+        <OptimizedImage src={game.coverImage} alt={`${game.title} artwork`} loading={priority ? 'eager' : 'lazy'} fetchPriority={priority ? 'high' : 'auto'} decoding="async" fallbackSrc={game.backdropImage} />
         <span className="trending-card-slash" />
       </Link>
       <div className="trending-card-content">

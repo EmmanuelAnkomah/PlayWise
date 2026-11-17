@@ -2,23 +2,36 @@ import { ArrowRight, ChevronRight, Gamepad2, ShieldCheck } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
 import { games } from '../data/games';
-import { siteConfig } from '../config/siteConfig';
 import { InstallationForm } from '../components/contact/InstallationForm';
 import { CinematicGameplaySection } from '../components/request/CinematicGameplaySection';
 import type { InstallationRequestPayload } from '../types/game';
-
-const requestHeroFallback = siteConfig.requestVideoPoster;
+import requestBanner from '../assets/Local-images/request-banner.webp';
 
 export function RequestInstallation() {
   const [params] = useSearchParams();
   const game = games.find((item) => item.id === params.get('game'));
-  const [request, setRequest] = useState<InstallationRequestPayload>({ fullName: '', email: '', whatsapp: '', gameTitle: game?.title ?? '', pcSpecifications: '', additionalMessage: '' });
+  const [request, setRequest] = useState<InstallationRequestPayload>({
+    fullName: '',
+    email: '',
+    whatsapp: '',
+    gameTitle: game?.title ?? '',
+    pcSpecifications: '',
+    additionalMessage: '',
+  });
+
+  const heroBanner = game?.backdropImage ?? requestBanner;
+
   return (
     <main className="request-page">
-      <section className="request-hero" style={{ backgroundImage: `url(${game?.backdropImage ?? requestHeroFallback})` }}>
-          <video className="request-hero-video" autoPlay muted loop playsInline poster={requestHeroFallback} aria-hidden="true">
-          <source src="https://res.cloudinary.com/ctapnkmr/video/upload/v1788971084/Reqeuim.mp4" type="video/mp4" />
-        </video>
+      <section className="request-hero" style={{ backgroundImage: `url(${heroBanner})` }}>
+        <img
+          className="request-hero-image"
+          src={heroBanner}
+          alt="PlayWise Installation Desk"
+          aria-hidden="true"
+          loading="eager"
+          decoding="async"
+        />
         <div className="request-hero-shade" />
         <div className="request-hero-inner">
           <div className="request-hero-copy">
