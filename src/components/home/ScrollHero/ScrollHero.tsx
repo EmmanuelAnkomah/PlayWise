@@ -64,6 +64,16 @@ function drawImageToCanvas(
   const imgAspect = FRAME_ASPECT;
   let sw: number, sh: number, sx: number, sy: number;
 
+  if (canvas.clientWidth <= 800 && canvasAspect < imgAspect) {
+    ctx.fillStyle = '#07110f';
+    ctx.fillRect(0, 0, cw, ch);
+    const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight) * 0.94;
+    const dw = img.naturalWidth * scale;
+    const dh = img.naturalHeight * scale;
+    ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
+    return;
+  }
+
   if (canvasAspect > imgAspect) {
     sw = img.naturalWidth;
     sh = img.naturalWidth / canvasAspect;

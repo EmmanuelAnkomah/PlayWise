@@ -12,7 +12,7 @@ export function TrendingCard({ game, statusLabel, priority = false }: { game: Ga
       </Link>
       <div className="trending-card-content">
         <div className="trending-card-status">{statusLabel ?? game.status}</div>
-        <div className="trending-card-meta"><span>{game.genres[0]}</span>{game.platform && <span>{game.platform}</span>}</div>
+        <div className="trending-card-meta"><span>{game.genres[0]}</span></div>
         <h3><Link to={`/games/${game.id}`}>{game.title}</Link></h3>
         <Link className="trending-card-link" to={`/games/${game.id}`} aria-label={`View ${game.title}`}><ArrowUpRight size={16} /></Link>
       </div>

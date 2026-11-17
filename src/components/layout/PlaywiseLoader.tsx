@@ -14,13 +14,13 @@ export function PlaywiseLoader({ onComplete }: { onComplete: () => void }) {
   }, [onComplete]);
 
   return <div className={`playwise-loader${isLeaving ? ' is-leaving' : ''}`} aria-label="Loading Playwise" role="status">
-    <img className="loader-image" src={loaderImage} alt="" aria-hidden="true" decoding="async" fetchPriority="high" />
+    <img className="loader-image" src={loaderImage} alt="" aria-hidden="true" loading="eager" decoding="async" fetchPriority="high" draggable="false" />
     <div className="loader-vignette" aria-hidden="true" />
     <div className="loader-center">
       <div className="loader-lockup">
         <div className="loader-mark">
           <span className="loader-p">P</span>
-          <svg viewBox="0 0 180 180" aria-hidden="true"><circle cx="90" cy="90" r="74" /></svg>
+          <div className="loader-dots" aria-hidden="true"><i /><i /><i /></div>
         </div>
         <div className="loader-wordmark" aria-hidden="true"><span className="loader-word-left">lay</span><span className="loader-word-right">wise</span></div>
       </div>
