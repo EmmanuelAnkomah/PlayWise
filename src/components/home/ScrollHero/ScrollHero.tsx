@@ -182,6 +182,13 @@ export function ScrollHero() {
     drawFrame(currentFrame.current);
   }
 
+  const drawFrameRef = useRef(drawFrame);
+  const resizeCanvasRef = useRef(resizeCanvas);
+  useEffect(() => {
+    drawFrameRef.current = drawFrame;
+    resizeCanvasRef.current = resizeCanvas;
+  });
+
   // Hide loading & draw first frame once ready
   useEffect(() => {
     if (frameSequence.firstFrameReady) {
@@ -189,23 +196,19 @@ export function ScrollHero() {
         loadingRef.current.style.opacity = '0';
         loadingRef.current.style.pointerEvents = 'none';
       }
-      resizeCanvas();
-      drawFrame(0);
+      drawFrameRef.current(0);
     }
-  }); // Runs every render — but quickly short-circuits
+  }, [frameSequence.firstFrameReady]);
 
   // ResizeObserver
   useEffect(() => {
     const sticky = stickyRef.current;
     if (!sticky) return;
-    resizeCanvas();
-    const ro = new ResizeObserver(() => resizeCanvas());
+    resizeCanvasRef.current();
+    const ro = new ResizeObserver(() => resizeCanvasRef.current());
     ro.observe(sticky);
     return () => ro.disconnect();
-  }); // eslint-disable-line — depends on resizeCanvas identity, fine to re-attach
-
-  const drawFrameRef = useRef(drawFrame);
-  useEffect(() => { drawFrameRef.current = drawFrame; });
+  }, []);
 
   /* ---------- Scroll tick handler ----------------------------------------- */
 
