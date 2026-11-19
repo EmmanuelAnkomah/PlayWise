@@ -136,7 +136,7 @@ export function ScrollHero() {
   const lyricRef = useRef<HTMLDivElement>(null);
   const lyricTextRef = useRef<HTMLSpanElement>(null);
   const activeCaptionIndex = useRef(0);
-  const captionTimer = useRef<number | null>(null);
+  const captionAnimationFrame = useRef<number | null>(null);
   const loadingRef = useRef<HTMLDivElement>(null);
 
   /* ---------- Canvas rendering -------------------------------------------- */
@@ -223,58 +223,38 @@ export function ScrollHero() {
       const lyricText = lyricTextRef.current;
       if (!lyricEl || !lyricText) return;
 
-      // Find which caption is active
+      // Caption boundaries are ordered by scroll progress so fast touch
+      // scrolling cannot leave the text behind the frame sequence.
       let newIndex = 0;
-      for (let i = 0; i < CAPTIONS.length; i++) {
-        if (progress >= CAPTIONS[i].start && progress <= CAPTIONS[i].end) {
-          newIndex = i;
-          break;
-        }
-        // If we're between captions (in transition gap), keep the last one
-        if (i > 0 && progress > CAPTIONS[i - 1].end && progress < CAPTIONS[i].start) {
-          newIndex = i;
-          break;
-        }
+      for (let i = 1; i < CAPTIONS.length; i++) {
+        if (progress < CAPTIONS[i].start) break;
+        newIndex = i;
       }
 
       if (newIndex !== activeCaptionIndex.current) {
-        // Caption is changing — fade out, swap text, fade in
         const prevIndex = activeCaptionIndex.current;
         activeCaptionIndex.current = newIndex;
+        const direction = prevIndex < newIndex ? 1 : -1;
 
-        // Fade out with upward drift
-        lyricEl.style.opacity = '0';
-        lyricEl.style.transform = prevIndex < newIndex
-          ? 'translateY(-12px)'   // scrolling down: text exits upward
-          : 'translateY(12px)';   // scrolling up: text exits downward
-
-        // After CSS transition (200ms), swap text and fade in
-        if (captionTimer.current !== null) {
-          window.clearTimeout(captionTimer.current);
+        if (captionAnimationFrame.current !== null) {
+          window.cancelAnimationFrame(captionAnimationFrame.current);
         }
-        requestAnimationFrame(() => {
-          captionTimer.current = window.setTimeout(() => {
-            setCaptionText(lyricText, CAPTIONS[newIndex].text);
-            // Enter from opposite direction
-            lyricEl.style.transition = 'none';
-            lyricEl.style.transform = prevIndex < newIndex
-              ? 'translateY(12px)'   // enter from below
-              : 'translateY(-12px)'; // enter from above
-            lyricEl.style.opacity = '0';
-
-            // Force reflow then animate in
-            void lyricEl.offsetHeight;
-            lyricEl.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
-            lyricEl.style.opacity = '1';
-            lyricEl.style.transform = 'translateY(0)';
-          }, 200);
+        lyricEl.style.opacity = '0';
+        lyricEl.style.transform = `translateY(${direction < 0 ? -8 : 8}px)`;
+        setCaptionText(lyricText, CAPTIONS[newIndex].text);
+        lyricEl.style.transition = 'none';
+        captionAnimationFrame.current = window.requestAnimationFrame(() => {
+          lyricEl.style.transition = 'opacity 0.12s ease-out, transform 0.12s ease-out';
+          lyricEl.style.opacity = '1';
+          lyricEl.style.transform = 'translateY(0)';
+          captionAnimationFrame.current = null;
         });
       }
     });
     return () => {
-      if (captionTimer.current !== null) {
-        window.clearTimeout(captionTimer.current);
-        captionTimer.current = null;
+      if (captionAnimationFrame.current !== null) {
+        window.cancelAnimationFrame(captionAnimationFrame.current);
+        captionAnimationFrame.current = null;
       }
     };
   }, [onTick, frameSequence]);

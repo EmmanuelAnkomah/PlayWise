@@ -1410,7 +1410,7 @@ body { background: var(--paper); color: var(--ink); }
 .scroll-hero-loading {
   position: absolute;
   inset: 0;
-  z-index: 10;
+  z-index: 2;
   display: grid;
   place-items: center;
   gap: 14px;
